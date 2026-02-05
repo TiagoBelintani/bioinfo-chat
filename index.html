@@ -3,59 +3,44 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BioInfo Chat — Bioinformática, Ômicas e Evolução</title>
+<title>BioInfo Chat — Bioinformatics, Omics & Evolution</title>
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Ubuntu, Cantarell, sans-serif;
+  font-family: system-ui, sans-serif;
   background: #0f172a;
   color: #e5e7eb;
   height: 100vh;
   display: flex;
   justify-content: center;
 }
-
 .container {
   width: 100%;
   max-width: 1100px;
   height: 100vh;
+  background: #020617;
   display: flex;
   flex-direction: column;
-  background: #020617;
 }
-
 header {
   padding: 16px 20px;
   border-bottom: 1px solid #1e293b;
 }
-
-header h1 {
-  font-size: 20px;
-}
-
-header p {
-  font-size: 13px;
-  color: #94a3b8;
-}
-
+header h1 { font-size: 20px; }
+header p { font-size: 13px; color: #94a3b8; }
 .warning {
   font-size: 11px;
   color: #fbbf24;
   margin-top: 6px;
 }
-
 .controls {
   display: flex;
   gap: 10px;
   padding: 10px 20px;
   border-bottom: 1px solid #1e293b;
-  background: #020617;
 }
-
-select, button.mode {
+select, button {
   background: #020617;
   border: 1px solid #1e293b;
   color: #e5e7eb;
@@ -63,26 +48,21 @@ select, button.mode {
   border-radius: 6px;
   font-size: 13px;
 }
-
-button.mode.active {
+button.active {
   background: #2563eb;
   border-color: #2563eb;
 }
-
 .chat {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
 }
-
 .message {
   max-width: 750px;
   margin: 0 auto 16px auto;
 }
-
 .user { text-align: right; }
 .assistant { text-align: left; }
-
 .bubble {
   display: inline-block;
   padding: 12px 16px;
@@ -90,30 +70,20 @@ button.mode.active {
   line-height: 1.6;
   white-space: pre-wrap;
 }
-
 .user .bubble {
   background: #2563eb;
   color: white;
 }
-
 .assistant .bubble {
   background: #0f172a;
   border: 1px solid #1e293b;
 }
-
-.error {
-  background: #450a0a;
-  color: #fecaca;
-  border-left: 4px solid #dc2626;
-}
-
 .input-area {
   display: flex;
   gap: 10px;
   padding: 14px 20px;
   border-top: 1px solid #1e293b;
 }
-
 input {
   flex: 1;
   background: #020617;
@@ -122,14 +92,12 @@ input {
   padding: 10px 14px;
   border-radius: 8px;
 }
-
 button.send {
   background: #2563eb;
   border: none;
   color: white;
   padding: 10px 18px;
   border-radius: 8px;
-  cursor: pointer;
 }
 </style>
 </head>
@@ -139,60 +107,64 @@ button.send {
 
 <header>
   <h1>🧬 BioInfo Chat</h1>
-  <p>Bioinformática, Ômicas e Evolução</p>
+  <p>Bioinformatics, Omics & Evolution</p>
   <div class="warning">
-    Ferramenta acadêmica experimental. Use de forma crítica e valide com a literatura.
+    Academic experimental tool. Use critically and validate with scientific literature.
   </div>
 </header>
 
 <div class="controls">
-  <button class="mode active" id="freeBtn">Modo Livre</button>
-  <button class="mode" id="discBtn">Modo Disciplina</button>
+  <button id="freeBtn" class="active">Free</button>
+  <button id="discBtn">Discipline</button>
 
-  <select id="preset">
-    <option value="general">Bioinformática Geral</option>
-    <option value="rnaseq">RNA-seq</option>
-    <option value="phylo">Filogenia</option>
-    <option value="genomics">Genômica</option>
+  <select id="language">
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
   </select>
 </div>
 
 <div class="chat" id="chat"></div>
 
 <div class="input-area">
-  <input id="input" placeholder="Digite sua pergunta científica…" />
-  <button class="send" onclick="send()">Enviar</button>
+  <input id="input" placeholder="Type your scientific question…" />
+  <button class="send" onclick="send()">Send</button>
 </div>
 
 </div>
 
 <script>
-const chat = document.getElementById("chat");
-const input = document.getElementById("input");
-
 let mode = "free";
-let history = JSON.parse(localStorage.getItem("bioinfo_history")) || [];
-let requests = Number(localStorage.getItem("req_count")) || 0;
-const LIMIT = 40;
-
-const PRESETS = {
-  general: "Você é um especialista em Bioinformática, Ômicas e Evolução.",
-  rnaseq: "Você é um especialista em análise de RNA-seq, expressão gênica e transcriptômica.",
-  phylo: "Você é um especialista em filogenia, filogenômica e evolução molecular.",
-  genomics: "Você é um especialista em genômica, montagem e anotação genômica."
-};
+let language = "pt";
+let history = [];
 
 const PROMPTS = {
-  free: "Responda de forma clara e objetiva.",
-  discipline:
-    "Responda em nível acadêmico estruturado: definição, contexto, exemplo e limitações."
+  pt: {
+    free: "Você é um assistente acadêmico especializado em Bioinformática, Ômicas e Evolução. Responda de forma clara e precisa.",
+    discipline:
+      "Você é um instrutor acadêmico. Responda em português brasileiro, estruturando a resposta em definição, contexto, exemplo e limitações."
+  },
+  en: {
+    free: "You are an academic assistant specialized in Bioinformatics, Omics, and Evolution. Respond clearly and concisely.",
+    discipline:
+      "You are an academic instructor. Respond in formal academic English, structuring the answer into definition, context, example, and limitations."
+  }
 };
 
-function add(text, role, error=false) {
+document.getElementById("language").onchange = e => language = e.target.value;
+document.getElementById("freeBtn").onclick = () => toggleMode("free");
+document.getElementById("discBtn").onclick = () => toggleMode("discipline");
+
+function toggleMode(m) {
+  mode = m;
+  freeBtn.classList.toggle("active", m === "free");
+  discBtn.classList.toggle("active", m === "discipline");
+}
+
+function add(text, role) {
   const d = document.createElement("div");
   d.className = `message ${role}`;
   const b = document.createElement("div");
-  b.className = "bubble" + (error ? " error" : "");
+  b.className = "bubble";
   b.textContent = text;
   d.appendChild(b);
   chat.appendChild(d);
@@ -200,54 +172,31 @@ function add(text, role, error=false) {
 }
 
 function send() {
-  if (!input.value.trim()) return;
-
-  if (requests >= LIMIT) {
-    add("Limite diário de uso atingido. Tente novamente amanhã.", "assistant", true);
-    return;
-  }
-
-  const text = input.value.trim();
-  input.value = "";
+  const inputEl = document.getElementById("input");
+  const text = inputEl.value.trim();
+  if (!text) return;
+  inputEl.value = "";
 
   add(text, "user");
   history.push({ role: "user", content: text });
-
-  const preset = PRESETS[document.getElementById("preset").value];
-  const system =
-    preset + " " + PROMPTS[mode];
 
   fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      messages: [{ role: "system", content: system }, ...history]
+      messages: [
+        { role: "system", content: PROMPTS[language][mode] },
+        ...history
+      ]
     })
   })
   .then(r => r.json())
   .then(d => {
     const reply = d.choices?.[0]?.message?.content;
-    if (!reply) throw new Error("Resposta inválida");
-    add(reply, "assistant");
+    add(reply || "Error.", "assistant");
     history.push({ role: "assistant", content: reply });
-    localStorage.setItem("bioinfo_history", JSON.stringify(history));
-    localStorage.setItem("req_count", ++requests);
-  })
-  .catch(() => add("Erro ao gerar resposta.", "assistant", true));
+  });
 }
-
-document.getElementById("freeBtn").onclick = () => {
-  mode = "free";
-  freeBtn.classList.add("active");
-  discBtn.classList.remove("active");
-};
-
-document.getElementById("discBtn").onclick = () => {
-  mode = "discipline";
-  discBtn.classList.add("active");
-  freeBtn.classList.remove("active");
-};
 </script>
 </body>
 </html>
-
