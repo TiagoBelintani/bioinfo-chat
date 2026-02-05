@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#2563eb" />
-  <meta name="description" content="Chat especializado em Bioinformática, Ômicas e Evolução" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Chat acadêmico em Bioinformática, Ômicas e Evolução" />
   <title>BioInfo Chat — Bioinformática, Ômicas e Evolução</title>
-
-  <link rel="manifest" href="manifest.json" />
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,7 +13,8 @@
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
                    Roboto, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #0f172a;
+      color: #e5e7eb;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -24,46 +23,48 @@
 
     .container {
       width: 100%;
-      max-width: 800px;
+      max-width: 1000px;
       height: 100vh;
-      background: #fff;
+      background: #020617;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 40px rgba(0,0,0,0.3);
     }
 
     .header {
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-      color: white;
-      padding: 20px;
-      text-align: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid #1e293b;
+      background: #020617;
     }
 
     .header h1 {
-      font-size: 24px;
-      margin-bottom: 6px;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
 
     .header p {
       font-size: 13px;
-      opacity: 0.9;
+      color: #94a3b8;
     }
 
     .chat-container {
       flex: 1;
-      padding: 20px;
+      padding: 24px;
       overflow-y: auto;
-      background: #f8fafc;
+      background: #020617;
     }
 
     .welcome {
+      max-width: 720px;
+      margin: 60px auto;
       text-align: center;
-      color: #64748b;
-      margin-top: 40px;
+      color: #94a3b8;
+      line-height: 1.7;
     }
 
     .message {
-      margin-bottom: 16px;
+      max-width: 720px;
+      margin: 0 auto 20px auto;
       display: flex;
     }
 
@@ -76,40 +77,62 @@
     }
 
     .bubble {
-      max-width: 75%;
-      padding: 12px 16px;
-      border-radius: 18px;
-      line-height: 1.5;
-      word-wrap: break-word;
+      padding: 14px 18px;
+      border-radius: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-size: 15px;
     }
 
     .user .bubble {
       background: #2563eb;
       color: white;
-      border-bottom-right-radius: 4px;
     }
 
     .assistant .bubble {
-      background: white;
-      border: 1px solid #e5e7eb;
-      color: #1f2937;
-      border-bottom-left-radius: 4px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      color: #e5e7eb;
+    }
+
+    .typing {
+      max-width: 720px;
+      margin: 0 auto 20px auto;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .error {
+      max-width: 720px;
+      margin: 0 auto 20px auto;
+      background: #450a0a;
+      color: #fecaca;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border-left: 4px solid #dc2626;
     }
 
     .input-container {
       display: flex;
-      gap: 10px;
-      padding: 16px;
-      border-top: 1px solid #e5e7eb;
+      gap: 12px;
+      padding: 18px 24px;
+      border-top: 1px solid #1e293b;
+      background: #020617;
     }
 
     #userInput {
       flex: 1;
-      padding: 12px 16px;
-      border-radius: 24px;
-      border: 2px solid #e5e7eb;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid #1e293b;
+      background: #020617;
+      color: #e5e7eb;
       font-size: 15px;
       outline: none;
+    }
+
+    #userInput::placeholder {
+      color: #64748b;
     }
 
     #userInput:focus {
@@ -117,8 +140,8 @@
     }
 
     #sendButton {
-      padding: 12px 24px;
-      border-radius: 24px;
+      padding: 14px 22px;
+      border-radius: 10px;
       border: none;
       background: #2563eb;
       color: white;
@@ -127,23 +150,8 @@
     }
 
     #sendButton:disabled {
-      background: #94a3b8;
+      background: #475569;
       cursor: not-allowed;
-    }
-
-    .typing {
-      font-style: italic;
-      color: #64748b;
-      margin-bottom: 16px;
-    }
-
-    .error {
-      background: #fee2e2;
-      color: #991b1b;
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      border-left: 4px solid #dc2626;
     }
   </style>
 </head>
@@ -157,10 +165,10 @@
 
     <div class="chat-container" id="chat">
       <div class="welcome" id="welcome">
-        <h2>Olá!</h2>
+        <h2>Bem-vindo</h2>
         <p>
-          Pergunte sobre genômica, transcriptômica, filogenia, evolução molecular,
-          pipelines bioinformáticos e análise de dados ômicos.
+          Pergunte sobre bioinformática, genômica, transcriptômica,
+          filogenia, evolução molecular e análise de dados ômicos.
         </p>
       </div>
     </div>
@@ -168,7 +176,7 @@
     <div class="input-container">
       <input
         id="userInput"
-        placeholder="Digite sua pergunta sobre bioinformática, ômicas ou evolução..."
+        placeholder="Digite sua pergunta científica…"
         onkeypress="if(event.key==='Enter') sendMessage()"
       />
       <button id="sendButton" onclick="sendMessage()">Enviar</button>
@@ -182,10 +190,10 @@
     const welcome = document.getElementById("welcome");
 
     const SYSTEM_PROMPT =
-      "Você é um assistente especializado em Bioinformática, Ômicas e Evolução. " +
-      "Explique conceitos de forma clara, técnica e didática, sempre em português brasileiro. " +
-      "Inclua exemplos práticos quando relevante.";
+      "Você é um assistente acadêmico especializado em Bioinformática, Ômicas e Evolução. " +
+      "Responda em português brasileiro, com rigor conceitual e clareza didática.";
 
+    const MAX_TURNS = 8;
     let history = [];
 
     function addMessage(text, role) {
@@ -194,7 +202,7 @@
 
       const bubble = document.createElement("div");
       bubble.className = "bubble";
-      bubble.innerHTML = text.replace(/\n/g, "<br>");
+      bubble.textContent = text;
 
       div.appendChild(bubble);
       chat.appendChild(div);
@@ -231,6 +239,7 @@
 
       addMessage(text, "user");
       history.push({ role: "user", content: text });
+      history = history.slice(-MAX_TURNS * 2);
 
       input.value = "";
       input.disabled = true;
@@ -251,7 +260,6 @@
         });
 
         const data = await response.json();
-
         removeTyping();
 
         if (!data.choices || !data.choices[0]) {
@@ -261,13 +269,15 @@
         }
 
         const reply = data.choices[0].message.content;
-
         history.push({ role: "assistant", content: reply });
         addMessage(reply, "assistant");
 
       } catch (err) {
         removeTyping();
-        addError("❌ Erro ao responder. Verifique o backend.");
+        addError(
+          err.message ||
+          "Não foi possível gerar resposta no momento."
+        );
         console.error(err);
       } finally {
         input.disabled = false;
@@ -278,3 +288,4 @@
   </script>
 </body>
 </html>
+
