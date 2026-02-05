@@ -7,6 +7,7 @@
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   font-family: system-ui, sans-serif;
   background: #0f172a;
@@ -15,6 +16,7 @@ body {
   display: flex;
   justify-content: center;
 }
+
 .container {
   width: 100%;
   max-width: 1100px;
@@ -23,24 +25,29 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 header {
   padding: 16px 20px;
   border-bottom: 1px solid #1e293b;
 }
+
 header h1 { font-size: 20px; }
 header p { font-size: 13px; color: #94a3b8; }
+
 .warning {
   font-size: 11px;
   color: #fbbf24;
   margin-top: 6px;
 }
+
 .controls {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   padding: 10px 20px;
   border-bottom: 1px solid #1e293b;
   flex-wrap: wrap;
 }
+
 select, button {
   background: #020617;
   border: 1px solid #1e293b;
@@ -48,22 +55,28 @@ select, button {
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 13px;
+  cursor: pointer;
 }
+
 button.active {
   background: #2563eb;
   border-color: #2563eb;
 }
+
 .chat {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
 }
+
 .message {
   max-width: 820px;
   margin: 0 auto 16px auto;
 }
+
 .user { text-align: right; }
 .assistant { text-align: left; }
+
 .bubble {
   display: inline-block;
   padding: 12px 16px;
@@ -71,20 +84,24 @@ button.active {
   line-height: 1.6;
   white-space: pre-wrap;
 }
+
 .user .bubble {
   background: #2563eb;
   color: white;
 }
+
 .assistant .bubble {
   background: #0f172a;
   border: 1px solid #1e293b;
 }
+
 .input-area {
   display: flex;
   gap: 10px;
   padding: 14px 20px;
   border-top: 1px solid #1e293b;
 }
+
 textarea {
   flex: 1;
   background: #020617;
@@ -95,12 +112,42 @@ textarea {
   resize: vertical;
   min-height: 48px;
 }
+
 button.send {
   background: #2563eb;
   border: none;
   color: white;
   padding: 10px 18px;
   border-radius: 8px;
+}
+
+/* MODAL */
+#helpModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#helpBox {
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 20px;
+  max-width: 620px;
+  border-radius: 8px;
+}
+
+#helpBox h3 {
+  margin-bottom: 10px;
+}
+
+#helpBox p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cbd5f5;
 }
 </style>
 </head>
@@ -112,7 +159,7 @@ button.send {
   <h1>🧬 BioInfo Chat</h1>
   <p>Bioinformatics, Omics & Evolution</p>
   <div class="warning">
-    Ferramenta acadêmica experimental. As respostas não substituem leitura do escopo editorial nem decisão de editores.
+    Ferramenta acadêmica experimental. Use de forma crítica e valide com a literatura científica.
   </div>
 </header>
 
@@ -127,6 +174,8 @@ button.send {
     <option value="pt">🇧🇷 Português</option>
     <option value="en">🇺🇸 English</option>
   </select>
+
+  <button id="helpBtn">❓ Sobre os modos</button>
 </div>
 
 <div class="chat" id="chat"></div>
@@ -138,11 +187,19 @@ button.send {
 
 </div>
 
+<!-- MODAL -->
+<div id="helpModal">
+  <div id="helpBox">
+    <h3>ℹ️ Sobre os modos</h3>
+    <p id="helpText"></p>
+    <button onclick="closeHelp()" style="margin-top:12px;">Fechar</button>
+  </div>
+</div>
+
 <script>
-let mode = "free";        // free | discipline
-let tool = "chat";       // chat | journals
+let mode = "free";
+let tool = "chat";
 let language = "pt";
-let history = [];
 
 const PROMPTS = {
   pt: {
@@ -152,7 +209,7 @@ const PROMPTS = {
         "Você é um instrutor acadêmico. Responda em português brasileiro, estruturando a resposta em definição, contexto, exemplo e limitações."
     },
     journals:
-      "Você é um consultor editorial acadêmico. A partir do resumo fornecido, sugira periódicos científicos nacionais e internacionais adequados ao escopo do estudo. Para cada periódico, forneça uma breve justificativa baseada no escopo editorial. Não garanta aceitação e inclua um aviso ético ao final."
+      "Você é um consultor editorial acadêmico. A partir do resumo fornecido, sugira periódicos científicos nacionais e internacionais adequados ao escopo do estudo, com breve justificativa. Não garanta aceitação e inclua um aviso ético."
   },
   en: {
     chat: {
@@ -161,8 +218,46 @@ const PROMPTS = {
         "You are an academic instructor. Respond in formal academic English, structuring the answer into definition, context, example, and limitations."
     },
     journals:
-      "You are an academic editorial advisor. Based on the provided abstract, suggest suitable national and international scientific journals. For each journal, include a brief justification based on editorial scope. Do not imply acceptance and include an ethical disclaimer."
+      "You are an academic editorial advisor. Based on the abstract, suggest suitable national and international journals, with brief justification. Do not imply acceptance and include an ethical disclaimer."
   }
+};
+
+const HELP_TEXT = {
+  pt: `
+<b>Chat</b><br>
+Modo padrão para dúvidas conceituais e discussão acadêmica.<br><br>
+
+<b>Modo Livre</b><br>
+Respostas diretas e objetivas para consultas rápidas.<br><br>
+
+<b>Modo Disciplina</b><br>
+Respostas estruturadas (definição, contexto, exemplo, limitações), ideais para ensino.<br><br>
+
+<b>Periódicos</b><br>
+Cole o resumo de um artigo científico para receber sugestões de periódicos
+nacionais e internacionais compatíveis com o escopo do estudo.
+Não há garantia de aceitação.<br><br>
+
+<b>Idioma</b><br>
+Selecione o idioma das respostas (Português ou Inglês).
+  `,
+  en: `
+<b>Chat</b><br>
+Standard mode for conceptual questions and academic discussion.<br><br>
+
+<b>Free Mode</b><br>
+Direct and concise answers for quick queries.<br><br>
+
+<b>Discipline Mode</b><br>
+Structured answers with definition, context, example, and limitations.<br><br>
+
+<b>Journals</b><br>
+Paste a manuscript abstract to receive suggestions of suitable national and international journals.
+No acceptance is implied.<br><br>
+
+<b>Language</b><br>
+Select the response language (Portuguese or English).
+  `
 };
 
 document.getElementById("language").onchange = e => language = e.target.value;
@@ -171,6 +266,15 @@ document.getElementById("freeBtn").onclick = () => setMode("free");
 document.getElementById("discBtn").onclick = () => setMode("discipline");
 document.getElementById("chatBtn").onclick = () => setTool("chat");
 document.getElementById("journalBtn").onclick = () => setTool("journals");
+
+document.getElementById("helpBtn").onclick = () => {
+  document.getElementById("helpText").innerHTML = HELP_TEXT[language];
+  document.getElementById("helpModal").style.display = "flex";
+};
+
+function closeHelp() {
+  document.getElementById("helpModal").style.display = "none";
+}
 
 function setMode(m) {
   mode = m;
@@ -203,12 +307,10 @@ function send() {
 
   add(text, "user");
 
-  let systemPrompt;
-  if (tool === "chat") {
-    systemPrompt = PROMPTS[language].chat[mode];
-  } else {
-    systemPrompt = PROMPTS[language].journals;
-  }
+  const systemPrompt =
+    tool === "chat"
+      ? PROMPTS[language].chat[mode]
+      : PROMPTS[language].journals;
 
   fetch("/api/chat", {
     method: "POST",
