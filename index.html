@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2563eb" />
-  <meta name="description" content="Chat especializado em Bioinformática, Filogenômica e UCEs" />
-  <title>BioInfo Chat - Filogenômica & UCEs</title>
+  <meta name="description" content="Chat especializado em Bioinformática, Ômicas e Evolução" />
+  <title>BioInfo Chat — Bioinformática, Ômicas e Evolução</title>
 
-  <!-- Manifest (opcional, pode manter mesmo sem ícones) -->
   <link rel="manifest" href="manifest.json" />
 
   <style>
@@ -153,20 +152,23 @@
   <div class="container">
     <div class="header">
       <h1>🧬 BioInfo Chat</h1>
-      <p>Especialista em Filogenômica, UCEs e Bioinformática</p>
+      <p>Bioinformática, Ômicas e Evolução</p>
     </div>
 
     <div class="chat-container" id="chat">
       <div class="welcome" id="welcome">
         <h2>Olá!</h2>
-        <p>Pergunte sobre UCEs, filogenômica ou pipelines bioinformáticos.</p>
+        <p>
+          Pergunte sobre genômica, transcriptômica, filogenia, evolução molecular,
+          pipelines bioinformáticos e análise de dados ômicos.
+        </p>
       </div>
     </div>
 
     <div class="input-container">
       <input
         id="userInput"
-        placeholder="Digite sua pergunta..."
+        placeholder="Digite sua pergunta sobre bioinformática, ômicas ou evolução..."
         onkeypress="if(event.key==='Enter') sendMessage()"
       />
       <button id="sendButton" onclick="sendMessage()">Enviar</button>
@@ -180,8 +182,9 @@
     const welcome = document.getElementById("welcome");
 
     const SYSTEM_PROMPT =
-      "Você é um assistente especializado em Bioinformática, Filogenômica e UCEs. " +
-      "Responda sempre em português brasileiro, de forma clara e técnica.";
+      "Você é um assistente especializado em Bioinformática, Ômicas e Evolução. " +
+      "Explique conceitos de forma clara, técnica e didática, sempre em português brasileiro. " +
+      "Inclua exemplos práticos quando relevante.";
 
     let history = [];
 
@@ -253,7 +256,7 @@
 
         if (!data.choices || !data.choices[0]) {
           throw new Error(
-            data.error || "Resposta inválida do servidor"
+            data.error?.message || "Resposta inválida do servidor"
           );
         }
 
