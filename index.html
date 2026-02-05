@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Chat gratuito especializado em Bioinformática, Filogenômica e UCEs">
+    <title>BioInfo Chat - Filogenômica & UCEs</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            box-shadow: 0 0 50px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: #2563eb;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            color: #1f2937;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .message.assistant .message-content pre {
+            background: #1f2937;
+            color: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+
+        .message.assistant .message-content code {
+            background: #f1f5f9;
+            color: #dc2626;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .message.assistant .message-content pre code {
+            background: transparent;
+            color: #10b981;
+            padding: 0;
+        }
+
+        .input-container {
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 24px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #userInput:focus {
+            border-color: #2563eb;
+        }
+
+        #sendButton {
+            padding: 12px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #sendButton:hover:not(:disabled) {
+            background: #1d4ed8;
+        }
+
+        #sendButton:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            max-width: 75px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .typing-indicator.active {
+            display: block;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background: #94a3b8;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748b;
+        }
+
+        .welcome-message h2 {
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+
+        .suggestions {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .suggestion-btn {
+            padding: 16px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .suggestion-btn:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .suggestion-btn strong {
+            display: block;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 16px;
+            border-left: 4px solid #dc2626;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .message-content {
+                max-width: 85%;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .suggestions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 BioInfo Chat</h1>
+            <p>Especialista em Filogenômica, UCEs e Pipelines Bioinformáticos</p>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="welcome-message" id="welcomeMessage">
+                <h2>Olá! Como posso ajudar?</h2>
+                <p>Sou especializado em bioinformática, filogenômica e UCEs. Pergunte sobre:</p>
+                
+                <div class="suggestions">
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <strong>🧪 Pipelines UCE</strong>
+                        Como usar PHYLUCE para análise de UCEs?
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <strong>🌳 Filogenômica</strong>
+                        Qual a melhor estratégia para inferência filogenética?
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <strong>⚙️ Troubleshooting</strong>
+                        Erros comuns em pipelines de montagem de UCEs
+                    </button>
+                    <button class="suggestion-btn" onclick="sendSuggestion(this)">
+                        <strong>📊 Análise de dados</strong>
+                        Como avaliar qualidade de dados NGS para UCEs?
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input 
+                type="text" 
+                id="userInput" 
+                placeholder="Digite sua pergunta sobre bioinformática..."
+                onkeypress="handleKeyPress(event)"
+            >
+            <button id="sendButton" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE'; // Usuário precisa adicionar a chave
+        
+        const SYSTEM_PROMPT = `Você é um assistente especializado em Bioinformática, com expertise em:
+
+- Filogenômica e análises evolutivas
+- UCEs (Ultra-Conserved Elements) e elementos genômicos conservados
+- Pipelines bioinformáticos: PHYLUCE, HybPiper, ipyrad, SECAPR
+- NGS (Next-Generation Sequencing) e análise de dados genômicos
+- Montagem de genomas e transcriptomas
+- Inferência filogenética: RAxML, IQ-TREE, MrBayes, BEAST
+- Análise de dados: qualidade, filtragem, alinhamento
+- Linguagens: Python, R, Bash para bioinformática
+- Ferramentas: BWA, SAMtools, GATK, SPAdes, Trinity
+
+Responda de forma clara, técnica mas acessível. Use exemplos de código quando relevante.
+Forneça comandos práticos e explique parâmetros importantes.
+Seja específico sobre versões de software e dependências quando necessário.
+Sempre em português brasileiro, a menos que código ou comandos exijam inglês.`;
+
+        let conversationHistory = [];
+
+        function sendSuggestion(button) {
+            const text = button.textContent.split('\n').pop().trim();
+            document.getElementById('userInput').value = text;
+            sendMessage();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Verificar se a API key foi configurada
+            if (GROQ_API_KEY === '
+') {
+                showError('⚠️ Configure sua chave API do Groq no código! Visite: https://console.groq.com');
+                return;
+            }
+
+            // Esconder mensagem de boas-vindas
+            document.getElementById('welcomeMessage').style.display = 'none';
+
+            // Adicionar mensagem do usuário
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Desabilitar input
+            input.disabled = true;
+            document.getElementById('sendButton').disabled = true;
+
+            // Mostrar indicador de digitação
+            showTypingIndicator();
+
+            try {
+                // Adicionar mensagem ao histórico
+                conversationHistory.push({
+                    role: 'user',
+                    content: message
+                });
+
+                // Chamar API do Groq
+                const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${GROQ_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: 'llama-3.1-70b-versatile', // Modelo gratuito e poderoso
+                        messages: [
+                            { role: 'system', content: SYSTEM_PROMPT },
+                            ...conversationHistory
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 2000
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro na API: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const assistantMessage = data.choices[0].message.content;
+
+                // Adicionar ao histórico
+                conversationHistory.push({
+                    role: 'assistant',
+                    content: assistantMessage
+                });
+
+                // Esconder indicador e mostrar resposta
+                hideTypingIndicator();
+                addMessage(assistantMessage, 'assistant');
+
+            } catch (error) {
+                hideTypingIndicator();
+                showError(`Erro ao processar mensagem: ${error.message}`);
+                console.error(error);
+            } finally {
+                // Reabilitar input
+                input.disabled = false;
+                document.getElementById('sendButton').disabled = false;
+                input.focus();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            // Processar markdown básico para código
+            let processedText = text;
+            
+            // Code blocks
+            processedText = processedText.replace(/```(\w+)?\n([\s\S]+?)```/g, '<pre><code>$2</code></pre>');
+            
+            // Inline code
+            processedText = processedText.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Line breaks
+            processedText = processedText.replace(/\n/g, '<br>');
+            
+            contentDiv.innerHTML = processedText;
+            messageDiv.appendChild(contentDiv);
+            chatContainer.appendChild(messageDiv);
+
+            // Scroll para o final
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const chatContainer = document.getElementById('chatContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message assistant';
+            typingDiv.id = 'typingIndicator';
+            
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator active';
+            indicator.innerHTML = '<span></span><span></span><span></span>';
+            
+            typingDiv.appendChild(indicator);
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function showError(message) {
+            const chatContainer = document.getElementById('chatContainer');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            chatContainer.appendChild(errorDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Registrar Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('Service Worker registrado'))
+                .catch(err => console.log('Erro ao registrar Service Worker:', err));
+        }
+    </script>
+</body>
+</html>

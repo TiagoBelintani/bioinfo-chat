@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplos de Perguntas - BioInfo Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #2563eb;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category h2 {
+            color: #1e293b;
+            font-size: 24px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2563eb;
+        }
+
+        .example {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .example:hover {
+            background: #eff6ff;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .example h3 {
+            color: #2563eb;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example p {
+            color: #475569;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .icon {
+            font-size: 20px;
+        }
+
+        .tip {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .tip strong {
+            color: #92400e;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .category h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Chat</a>
+        
+        <h1>💡 Exemplos de Perguntas</h1>
+        <p class="subtitle">Inspire-se com estas perguntas para aproveitar ao máximo o BioInfo Chat</p>
+
+        <div class="category">
+            <h2><span class="icon">🧪</span> Pipelines de UCEs</h2>
+            
+            <div class="example">
+                <h3>Iniciando com PHYLUCE</h3>
+                <p>"Como começar a usar PHYLUCE para análise de UCEs? Quais são os pré-requisitos?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Montagem de UCEs</h3>
+                <p>"Qual a diferença entre usar Trinity e SPAdes para montar UCEs? Quando usar cada um?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Qualidade dos Dados</h3>
+                <p>"Como avaliar a qualidade das minhas leituras NGS antes de começar a montagem de UCEs?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Troubleshooting</h3>
+                <p>"Meu PHYLUCE está dando erro 'sequence contigs not found'. O que pode ser?"</p>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2><span class="icon">🌳</span> Inferência Filogenética</h2>
+            
+            <div class="example">
+                <h3>Escolha de Método</h3>
+                <p>"Qual a diferença entre RAxML, IQ-TREE e BEAST para inferência filogenética?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Modelos de Substituição</h3>
+                <p>"Como escolher o melhor modelo de substituição nucleotídica para minha análise?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Bootstrap vs Bayesiano</h3>
+                <p>"Quando usar análise de bootstrap vs inferência bayesiana?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Árvore de Espécies</h3>
+                <p>"Como usar ASTRAL para inferir árvore de espécies a partir de árvores gênicas?"</p>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2><span class="icon">⚙️</span> Processamento de Dados NGS</h2>
+            
+            <div class="example">
+                <h3>Limpeza de Dados</h3>
+                <p>"Qual o pipeline completo para limpar dados de sequenciamento Illumina?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Trimagem</h3>
+                <p>"Trimmomatic vs Cutadapt: qual é melhor para remover adaptadores?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Alinhamento</h3>
+                <p>"Parâmetros recomendados do BWA para alinhar reads de UCEs contra genoma de referência"</p>
+            </div>
+
+            <div class="example">
+                <h3>Filtragem</h3>
+                <p>"Como filtrar SNPs de baixa qualidade usando GATK?"</p>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2><span class="icon">💻</span> Scripts e Automação</h2>
+            
+            <div class="example">
+                <h3>Loop para Múltiplos Arquivos</h3>
+                <p>"Me mostre um script bash para processar múltiplos arquivos FASTQ em paralelo"</p>
+            </div>
+
+            <div class="example">
+                <h3>Python para Bioinformática</h3>
+                <p>"Como ler e filtrar um arquivo FASTA usando Biopython?"</p>
+            </div>
+
+            <div class="example">
+                <h3>R para Análise</h3>
+                <p>"Script R para plotar cobertura de sequenciamento por amostra"</p>
+            </div>
+
+            <div class="example">
+                <h3>Automatização</h3>
+                <p>"Como criar um pipeline Snakemake para análise de UCEs?"</p>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2><span class="icon">🔍</span> Análise de Resultados</h2>
+            
+            <div class="example">
+                <h3>Interpretação de Suporte</h3>
+                <p>"O que significam valores de bootstrap de 70 vs 95 em uma árvore filogenética?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Detecção de Outliers</h3>
+                <p>"Como identificar loci problemáticos em análises filogenômicas?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Cobertura Insuficiente</h3>
+                <p>"O que fazer quando a cobertura média dos UCEs está abaixo de 20x?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Conflitos Filogenéticos</h3>
+                <p>"Como lidar com topologias conflitantes entre árvores gênicas?"</p>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2><span class="icon">🎯</span> Otimização e Performance</h2>
+            
+            <div class="example">
+                <h3>Paralelização</h3>
+                <p>"Como paralelizar montagem de transcriptomas no cluster usando GNU parallel?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Recursos Computacionais</h3>
+                <p>"Quanto de RAM e CPU preciso para montar genoma de 500Mb com SPAdes?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Redução de Dados</h3>
+                <p>"Estratégias para reduzir tamanho de dataset sem perder informação filogenética"</p>
+            </div>
+
+            <div class="example">
+                <h3>Checkpoints</h3>
+                <p>"Como criar checkpoints em pipeline longo para não perder progresso?"</p>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2><span class="icon">📊</span> Desenho Experimental</h2>
+            
+            <div class="example">
+                <h3>Número de Loci</h3>
+                <p>"Quantos UCEs são necessários para resolver filogenia de família com 50 espécies?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Profundidade de Sequenciamento</h3>
+                <p>"Qual profundidade de sequenciamento ideal para captura de UCEs?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Seleção de Outgroup</h3>
+                <p>"Como escolher outgroups apropriados para minha análise filogenética?"</p>
+            </div>
+
+            <div class="example">
+                <h3>Amostragem Taxonômica</h3>
+                <p>"Estratégias para amostrar táxons em estudos filogenômicos de larga escala"</p>
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>💡 Dica:</strong> Seja específico nas suas perguntas! Quanto mais contexto você fornecer 
+            (sua espécie-modelo, tipo de dados, recursos computacionais), melhor será a resposta. 
+            Você também pode pedir exemplos de comandos, scripts ou explicações passo-a-passo.
+        </div>
+    </div>
+</body>
+</html>
