@@ -25,7 +25,7 @@
 const GROQ_API_KEY = 'YOUR_GROQ_API_KEY_HERE';
 
 // DEPOIS:
-const GROQ_API_KEY = 'gsk_abc123xyz...'; // Sua chave aqui
+const GROQ_API_KEY = 'SUA_GROQ_API_KEY_AQUI'; // Sua chave aqui
 ```
 
 4. Salve o arquivo
