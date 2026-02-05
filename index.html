@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f172a" />
-  <meta name="description" content="Chat acadêmico em Bioinformática, Ômicas e Evolução" />
+  <meta name="description" content="Ferramenta acadêmica em Bioinformática, Ômicas e Evolução" />
   <title>BioInfo Chat — Bioinformática, Ômicas e Evolução</title>
 
   <style>
@@ -39,12 +39,19 @@
     .header h1 {
       font-size: 22px;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .header p {
       font-size: 13px;
       color: #94a3b8;
+      margin-bottom: 8px;
+    }
+
+    .academic-warning {
+      font-size: 11px;
+      color: #fbbf24;
+      line-height: 1.4;
     }
 
     .chat-container {
@@ -161,14 +168,24 @@
     <div class="header">
       <h1>🧬 BioInfo Chat</h1>
       <p>Bioinformática, Ômicas e Evolução</p>
+      <div class="academic-warning">
+        ⚠️ Ferramenta acadêmica experimental de apoio ao ensino e ao estudo.
+        Use as respostas de forma crítica e valide com a literatura científica.
+      </div>
     </div>
 
     <div class="chat-container" id="chat">
       <div class="welcome" id="welcome">
         <h2>Bem-vindo</h2>
         <p>
-          Pergunte sobre bioinformática, genômica, transcriptômica,
-          filogenia, evolução molecular e análise de dados ômicos.
+          Este chat foi desenvolvido como apoio acadêmico para estudantes e
+          pesquisadores em Bioinformática, Ômicas e Evolução.
+        </p>
+        <p style="margin-top:12px;">
+          Idealizado por <strong>Tiago Belintani</strong><br />
+          <a href="https://tiagobelintani.github.io/" target="_blank" style="color:#60a5fa;">
+            https://tiagobelintani.github.io/
+          </a>
         </p>
       </div>
     </div>
@@ -190,8 +207,15 @@
     const welcome = document.getElementById("welcome");
 
     const SYSTEM_PROMPT =
-      "Você é um assistente acadêmico especializado em Bioinformática, Ômicas e Evolução. " +
-      "Responda em português brasileiro, com rigor conceitual e clareza didática.";
+      "Você é um instrutor acadêmico especializado em Bioinformática, Ômicas e Evolução. " +
+      "Responda sempre em português brasileiro, com rigor conceitual e clareza didática, " +
+      "adequado ao nível de graduação e pós-graduação. " +
+      "Sempre que possível, organize a resposta em: " +
+      "1) definição do conceito, " +
+      "2) contexto científico, " +
+      "3) exemplo ilustrativo, " +
+      "4) observações ou limitações. " +
+      "Estimule o pensamento crítico e a consulta à literatura científica.";
 
     const MAX_TURNS = 8;
     let history = [];
