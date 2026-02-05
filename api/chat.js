@@ -1,12 +1,20 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { messages } = req.body;
+    const body = typeof req.body === "string"
+      ? JSON.parse(req.body)
+      : req.body;
 
-    const response = await fetch(
+    const messages = body?.messages;
+
+    if (!messages) {
+      return res.status(400).json({ error: "Missing messages" });
+    }
+
+    const groqResponse = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
@@ -22,10 +30,16 @@ export default async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
+    if (!groqResponse.ok) {
+      const text = await groqResponse.text();
+      return res.status(500).json({ error: text });
+    }
+
+    const data = await groqResponse.json();
     res.status(200).json(data);
 
   } catch (err) {
+    console.error("RUNTIME ERROR:", err);
     res.status(500).json({ error: err.message });
   }
-}
+};
