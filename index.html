@@ -1,103 +1,277 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BioInfo Chat</title>
-<meta name="theme-color" content="#2563eb">
-<link rel="manifest" href="manifest.json">
-<style>
-/* --- TODO O SEU CSS ORIGINAL (não mexi) --- */
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description" content="Chat especializado em Bioinformática, Filogenômica e UCEs" />
+  <title>BioInfo Chat - Filogenômica & UCEs</title>
+
+  <!-- Manifest (opcional, pode manter mesmo sem ícones) -->
+  <link rel="manifest" href="manifest.json" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0,0,0,0.3);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .chat-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f8fafc;
+    }
+
+    .welcome {
+      text-align: center;
+      color: #64748b;
+      margin-top: 40px;
+    }
+
+    .message {
+      margin-bottom: 16px;
+      display: flex;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message.assistant {
+      justify-content: flex-start;
+    }
+
+    .bubble {
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+
+    .user .bubble {
+      background: #2563eb;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .assistant .bubble {
+      background: white;
+      border: 1px solid #e5e7eb;
+      color: #1f2937;
+      border-bottom-left-radius: 4px;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+      padding: 16px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    #userInput {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 24px;
+      border: 2px solid #e5e7eb;
+      font-size: 15px;
+      outline: none;
+    }
+
+    #userInput:focus {
+      border-color: #2563eb;
+    }
+
+    #sendButton {
+      padding: 12px 24px;
+      border-radius: 24px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    #sendButton:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .typing {
+      font-style: italic;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border-left: 4px solid #dc2626;
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
-  <div class="header">
-    <h1>🧬 BioInfo Chat</h1>
-    <p>Especialista em Filogenômica, UCEs e Bioinformática</p>
-  </div>
+  <div class="container">
+    <div class="header">
+      <h1>🧬 BioInfo Chat</h1>
+      <p>Especialista em Filogenômica, UCEs e Bioinformática</p>
+    </div>
 
-  <div class="chat-container" id="chatContainer">
-    <div class="welcome-message" id="welcomeMessage">
-      <h2>Olá! Como posso ajudar?</h2>
+    <div class="chat-container" id="chat">
+      <div class="welcome" id="welcome">
+        <h2>Olá!</h2>
+        <p>Pergunte sobre UCEs, filogenômica ou pipelines bioinformáticos.</p>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input
+        id="userInput"
+        placeholder="Digite sua pergunta..."
+        onkeypress="if(event.key==='Enter') sendMessage()"
+      />
+      <button id="sendButton" onclick="sendMessage()">Enviar</button>
     </div>
   </div>
 
-  <div class="input-container">
-    <input id="userInput" placeholder="Digite sua pergunta..." onkeypress="if(event.key==='Enter') sendMessage()">
-    <button onclick="sendMessage()">Enviar</button>
-  </div>
-</div>
+  <script>
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("userInput");
+    const button = document.getElementById("sendButton");
+    const welcome = document.getElementById("welcome");
 
-<script>
-const SYSTEM_PROMPT = `Você é um assistente especializado em Bioinformática,
-Filogenômica, UCEs e pipelines computacionais.
-Responda sempre em português brasileiro.`;
+    const SYSTEM_PROMPT =
+      "Você é um assistente especializado em Bioinformática, Filogenômica e UCEs. " +
+      "Responda sempre em português brasileiro, de forma clara e técnica.";
 
-let conversationHistory = [];
+    let history = [];
 
-async function sendMessage() {
-  const input = document.getElementById("userInput");
-  const text = input.value.trim();
-  if (!text) return;
+    function addMessage(text, role) {
+      const div = document.createElement("div");
+      div.className = "message " + role;
 
-  document.getElementById("welcomeMessage").style.display = "none";
-  addMessage(text, "user");
-  input.value = "";
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      bubble.innerHTML = text.replace(/\n/g, "<br>");
 
-  conversationHistory.push({ role: "user", content: text });
+      div.appendChild(bubble);
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
 
-  showTyping();
+    function addTyping() {
+      const div = document.createElement("div");
+      div.id = "typing";
+      div.className = "typing";
+      div.textContent = "Digitando…";
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
 
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          ...conversationHistory
-        ]
-      })
-    });
+    function removeTyping() {
+      const t = document.getElementById("typing");
+      if (t) t.remove();
+    }
 
-    if (!response.ok) throw new Error("Erro no servidor");
+    function addError(text) {
+      const div = document.createElement("div");
+      div.className = "error";
+      div.textContent = text;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
 
-    const data = await response.json();
-    const reply = data.choices[0].message.content;
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
 
-    conversationHistory.push({ role: "assistant", content: reply });
-    hideTyping();
-    addMessage(reply, "assistant");
+      welcome.style.display = "none";
 
-  } catch (e) {
-    hideTyping();
-    addMessage("❌ Erro ao responder. Verifique o backend.", "assistant");
-    console.error(e);
-  }
-}
+      addMessage(text, "user");
+      history.push({ role: "user", content: text });
 
-function addMessage(text, role) {
-  const div = document.createElement("div");
-  div.className = "message " + role;
-  div.innerHTML = `<div class="message-content">${text.replace(/\n/g,"<br>")}</div>`;
-  chatContainer.appendChild(div);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
+      input.value = "";
+      input.disabled = true;
+      button.disabled = true;
 
-function showTyping() {
-  const t = document.createElement("div");
-  t.id = "typing";
-  t.className = "message assistant";
-  t.innerHTML = "<div class='message-content'>Digitando…</div>";
-  chatContainer.appendChild(t);
-}
+      addTyping();
 
-function hideTyping() {
-  const t = document.getElementById("typing");
-  if (t) t.remove();
-}
-</script>
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              ...history
+            ]
+          })
+        });
+
+        const data = await response.json();
+
+        removeTyping();
+
+        if (!data.choices || !data.choices[0]) {
+          throw new Error(
+            data.error || "Resposta inválida do servidor"
+          );
+        }
+
+        const reply = data.choices[0].message.content;
+
+        history.push({ role: "assistant", content: reply });
+        addMessage(reply, "assistant");
+
+      } catch (err) {
+        removeTyping();
+        addError("❌ Erro ao responder. Verifique o backend.");
+        console.error(err);
+      } finally {
+        input.disabled = false;
+        button.disabled = false;
+        input.focus();
+      }
+    }
+  </script>
 </body>
 </html>
