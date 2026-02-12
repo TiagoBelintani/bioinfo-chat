@@ -1,6 +1,7 @@
 #  BioInfo Chat
+[![DOI](https://zenodo.org/badge/1150782280.svg)](https://doi.org/10.5281/zenodo.18621489)
 
-**BioInfo Chat** é uma ferramenta acadêmica experimental de apoio ao ensino e ao estudo em **Bioinformática, Ômicas e Evolução**.
+**BioInfo Chat** é uma ferramenta acadêmica experimental de apoio ao ensino e ao estudo em **Bioinformática, Ômicas e Evolução**. 
 
 O sistema foi desenvolvido para auxiliar estudantes, docentes e pesquisadores na compreensão de conceitos, metodologias e pipelines utilizados em análises de dados biológicos, como genômica, transcriptômica, filogenia e evolução molecular.
 
