@@ -3,12 +3,16 @@
 
 <head>
 
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
+
+  <!-- =====================================================
+       PRIMARY SEO
+       ===================================================== -->
 
   <title>
     BioInfo Chat — Bioinformatics, Omics & Evolution
@@ -16,16 +20,108 @@
 
   <meta
     name="description"
-    content="BioInfo Chat is an experimental academic tool for Bioinformatics, Omics and Evolution."
+    content="BioInfo Chat is an experimental academic conversational tool for exploring Bioinformatics, Omics and Evolution."
   >
 
   <meta
     name="robots"
-    content="index, follow"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <meta
+    name="author"
+    content="Tiago Belintani"
+  >
+
+  <link
+    rel="canonical"
+    href="https://bioinfo-chat.vercel.app/"
   >
 
 
-  <!-- Fonts -->
+  <!-- =====================================================
+       OPEN GRAPH
+       ===================================================== -->
+
+  <meta
+    property="og:site_name"
+    content="BioInfo Chat"
+  >
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:title"
+    content="BioInfo Chat — Bioinformatics, Omics & Evolution"
+  >
+
+  <meta
+    property="og:description"
+    content="An experimental academic tool for exploring Bioinformatics, Omics and Evolution."
+  >
+
+  <meta
+    property="og:url"
+    content="https://bioinfo-chat.vercel.app/"
+  >
+
+
+  <!-- =====================================================
+       TWITTER / SOCIAL CARDS
+       ===================================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="BioInfo Chat — Bioinformatics, Omics & Evolution"
+  >
+
+  <meta
+    name="twitter:description"
+    content="An experimental academic tool for Bioinformatics, Omics and Evolution."
+  >
+
+
+  <!-- =====================================================
+       STRUCTURED DATA
+       ===================================================== -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BioInfo Chat",
+    "url": "https://bioinfo-chat.vercel.app/",
+    "description": "An experimental academic conversational tool for exploring Bioinformatics, Omics and Evolution.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "inLanguage": [
+      "pt-BR",
+      "en"
+    ],
+    "creator": {
+      "@type": "Person",
+      "name": "Tiago Belintani",
+      "url": "https://tiagobelintani.github.io/",
+      "sameAs": [
+        "https://github.com/TiagoBelintani",
+        "https://orcid.org/0000-0001-9485-1145"
+      ]
+    }
+  }
+  </script>
+
+
+  <!-- =====================================================
+       FONTS
+       ===================================================== -->
 
   <link
     rel="preconnect"
@@ -58,11 +154,9 @@
 
       --surface-hover:#302e2a;
 
-      --border:
-        rgba(255,255,255,.09);
+      --border:rgba(255,255,255,.09);
 
-      --border-strong:
-        rgba(255,255,255,.14);
+      --border-strong:rgba(255,255,255,.14);
 
       --text:#f1eee8;
 
@@ -74,14 +168,11 @@
 
       --accent-hover:#e18463;
 
-      --accent-soft:
-        rgba(217,119,87,.12);
+      --accent-soft:rgba(217,119,87,.12);
 
-      --warning-bg:
-        rgba(217,119,87,.07);
+      --warning-bg:rgba(217,119,87,.07);
 
-      --warning-border:
-        rgba(217,119,87,.20);
+      --warning-border:rgba(217,119,87,.20);
 
       --sidebar-width:320px;
 
@@ -116,11 +207,9 @@
         system-ui,
         sans-serif;
 
-      background:
-        var(--bg);
+      background:var(--bg);
 
-      color:
-        var(--text);
+      color:var(--text);
 
       overflow:hidden;
 
@@ -155,7 +244,6 @@
        APP
        ====================================================== */
 
-
     .app {
 
       display:flex;
@@ -171,14 +259,11 @@
        SIDEBAR
        ====================================================== */
 
-
     .sidebar {
 
-      width:
-        var(--sidebar-width);
+      width:var(--sidebar-width);
 
-      min-width:
-        var(--sidebar-width);
+      min-width:var(--sidebar-width);
 
       height:100vh;
 
@@ -186,14 +271,11 @@
 
       flex-direction:column;
 
-      padding:
-        22px 20px;
+      padding:22px 20px;
 
-      background:
-        var(--sidebar);
+      background:var(--sidebar);
 
-      border-right:
-        1px solid var(--border);
+      border-right:1px solid var(--border);
 
       overflow-y:auto;
 
@@ -209,8 +291,7 @@
 
     .sidebar::-webkit-scrollbar-thumb {
 
-      background:
-        rgba(255,255,255,.07);
+      background:rgba(255,255,255,.07);
 
       border-radius:10px;
 
@@ -220,7 +301,6 @@
     /* ======================================================
        BRAND
        ====================================================== */
-
 
     .brand {
 
@@ -249,8 +329,7 @@
 
       margin-top:7px;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.73rem;
 
@@ -260,7 +339,6 @@
     /* ======================================================
        NAVIGATION
        ====================================================== */
-
 
     .nav-group {
 
@@ -283,18 +361,15 @@
 
       gap:12px;
 
-      padding:
-        11px 13px;
+      padding:11px 13px;
 
       border:0;
 
       border-radius:9px;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       text-align:left;
 
@@ -307,19 +382,16 @@
 
     .nav-item:hover {
 
-      background:
-        var(--surface-hover);
+      background:var(--surface-hover);
 
-      color:
-        var(--text);
+      color:var(--text);
 
     }
 
 
     .nav-item.active {
 
-      background:
-        var(--accent-soft);
+      background:var(--accent-soft);
 
       color:#efb8a4;
 
@@ -339,11 +411,9 @@
 
       height:1px;
 
-      background:
-        var(--border);
+      background:var(--border);
 
-      margin:
-        20px 0;
+      margin:20px 0;
 
     }
 
@@ -352,15 +422,13 @@
        LANGUAGE
        ====================================================== */
 
-
     .language-label {
 
       display:block;
 
       margin-bottom:8px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.67rem;
 
@@ -377,19 +445,15 @@
 
       width:100%;
 
-      padding:
-        10px 12px;
+      padding:10px 12px;
 
-      border:
-        1px solid var(--border);
+      border:1px solid var(--border);
 
       border-radius:9px;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--text);
+      color:var(--text);
 
       outline:none;
 
@@ -398,11 +462,9 @@
 
     .language-select option {
 
-      background:
-        var(--surface);
+      background:var(--surface);
 
-      color:
-        var(--text);
+      color:var(--text);
 
     }
 
@@ -411,22 +473,19 @@
        NEW CHAT
        ====================================================== */
 
-
     .new-chat {
 
       width:100%;
 
       margin-top:17px;
 
-      padding:
-        12px 14px;
+      padding:12px 14px;
 
       border:0;
 
       border-radius:8px;
 
-      background:
-        var(--accent);
+      background:var(--accent);
 
       color:white;
 
@@ -441,11 +500,9 @@
 
     .new-chat:hover {
 
-      background:
-        var(--accent-hover);
+      background:var(--accent-hover);
 
-      transform:
-        translateY(-1px);
+      transform:translateY(-1px);
 
     }
 
@@ -453,7 +510,6 @@
     /* ======================================================
        RECENT CONVERSATIONS
        ====================================================== */
-
 
     .recent {
 
@@ -468,8 +524,7 @@
 
       align-items:center;
 
-      justify-content:
-        space-between;
+      justify-content:space-between;
 
       margin-bottom:8px;
 
@@ -478,8 +533,7 @@
 
     .recent-title {
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.7rem;
 
@@ -490,11 +544,9 @@
 
       border:0;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.64rem;
 
@@ -503,8 +555,7 @@
 
     .clear-history:hover {
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
     }
 
@@ -522,11 +573,9 @@
 
     .recent-empty {
 
-      padding:
-        7px 2px;
+      padding:7px 2px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.68rem;
 
@@ -556,14 +605,11 @@
 
       border-radius:7px;
 
-      padding:
-        8px 7px;
+      padding:8px 7px;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.69rem;
 
@@ -581,11 +627,9 @@
     .recent-item:hover,
     .recent-item.active {
 
-      background:
-        var(--surface-hover);
+      background:var(--surface-hover);
 
-      color:
-        var(--text);
+      color:var(--text);
 
     }
 
@@ -596,18 +640,15 @@
 
       height:25px;
 
-      flex:
-        0 0 auto;
+      flex:0 0 auto;
 
       border:0;
 
       border-radius:6px;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       opacity:0;
 
@@ -618,8 +659,7 @@
     }
 
 
-    .recent-row:hover
-    .delete-chat {
+    .recent-row:hover .delete-chat {
 
       opacity:1;
 
@@ -628,11 +668,9 @@
 
     .delete-chat:hover {
 
-      background:
-        rgba(255,255,255,.05);
+      background:rgba(255,255,255,.05);
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
     }
 
@@ -640,7 +678,6 @@
     /* ======================================================
        SIDEBAR BOTTOM
        ====================================================== */
-
 
     .sidebar-bottom {
 
@@ -655,20 +692,17 @@
        ABOUT
        ====================================================== */
 
-
     .about-sidebar {
 
       margin-bottom:12px;
 
       padding:14px;
 
-      border:
-        1px solid var(--border);
+      border:1px solid var(--border);
 
       border-radius:11px;
 
-      background:
-        rgba(255,255,255,.02);
+      background:rgba(255,255,255,.02);
 
     }
 
@@ -677,8 +711,7 @@
 
       margin-bottom:7px;
 
-      color:
-        var(--text);
+      color:var(--text);
 
       font-family:
         "Instrument Serif",
@@ -694,8 +727,7 @@
 
     .about-sidebar p {
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.67rem;
 
@@ -710,8 +742,7 @@
 
       margin-top:9px;
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
       font-size:.67rem;
 
@@ -731,18 +762,15 @@
        CREATOR
        ====================================================== */
 
-
     .creator-card {
 
-      border:
-        1px solid var(--border);
+      border:1px solid var(--border);
 
       border-radius:11px;
 
       overflow:hidden;
 
-      background:
-        rgba(255,255,255,.02);
+      background:rgba(255,255,255,.02);
 
     }
 
@@ -758,8 +786,7 @@
 
       margin-bottom:4px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.62rem;
 
@@ -768,8 +795,7 @@
 
     .creator-name {
 
-      color:
-        var(--text);
+      color:var(--text);
 
       font-size:.78rem;
 
@@ -782,8 +808,7 @@
 
       display:flex;
 
-      border-top:
-        1px solid var(--border);
+      border-top:1px solid var(--border);
 
     }
 
@@ -794,8 +819,7 @@
 
       padding:10px;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       text-align:center;
 
@@ -808,16 +832,14 @@
 
     .creator-links a:hover {
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
     }
 
 
     .creator-links a + a {
 
-      border-left:
-        1px solid var(--border);
+      border-left:1px solid var(--border);
 
     }
 
@@ -825,7 +847,6 @@
     /* ======================================================
        LEGAL LINKS
        ====================================================== */
-
 
     .legal-links {
 
@@ -841,8 +862,7 @@
 
       margin-top:11px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.61rem;
 
@@ -851,8 +871,7 @@
 
     .legal-links a {
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       text-decoration:none;
 
@@ -861,8 +880,7 @@
 
     .legal-links a:hover {
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
     }
 
@@ -870,7 +888,6 @@
     /* ======================================================
        MAIN
        ====================================================== */
-
 
     .main {
 
@@ -886,8 +903,7 @@
 
       flex-direction:column;
 
-      background:
-        var(--bg);
+      background:var(--bg);
 
     }
 
@@ -903,7 +919,6 @@
        CHAT AREA
        ====================================================== */
 
-
     .chat-area {
 
       flex:1;
@@ -914,9 +929,7 @@
         38px
         max(
           35px,
-          calc(
-            (100% - 820px) / 2
-          )
+          calc((100% - 820px) / 2)
         )
         190px;
 
@@ -932,8 +945,7 @@
 
     .chat-area::-webkit-scrollbar-thumb {
 
-      background:
-        rgba(255,255,255,.08);
+      background:rgba(255,255,255,.08);
 
       border-radius:20px;
 
@@ -943,7 +955,6 @@
     /* ======================================================
        WELCOME
        ====================================================== */
-
 
     .welcome {
 
@@ -969,19 +980,13 @@
         Georgia,
         serif;
 
-      font-size:
-        clamp(
-          3rem,
-          6vw,
-          4.5rem
-        );
+      font-size:clamp(3rem,6vw,4.5rem);
 
       font-weight:400;
 
       line-height:.98;
 
-      letter-spacing:
-        -.025em;
+      letter-spacing:-.025em;
 
     }
 
@@ -990,8 +995,7 @@
 
       margin-top:12px;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:1rem;
 
@@ -1004,11 +1008,9 @@
 
       height:2px;
 
-      margin:
-        23px auto 21px;
+      margin:23px auto 21px;
 
-      background:
-        var(--accent);
+      background:var(--accent);
 
     }
 
@@ -1017,8 +1019,7 @@
 
       max-width:575px;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.88rem;
 
@@ -1030,7 +1031,6 @@
     /* ======================================================
        MODES
        ====================================================== */
-
 
     .mode-buttons {
 
@@ -1051,41 +1051,33 @@
 
       min-width:112px;
 
-      padding:
-        10px 17px;
+      padding:10px 17px;
 
-      border:
-        1px solid var(--border);
+      border:1px solid var(--border);
 
       border-radius:10px;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
     }
 
 
     .mode-pill:hover {
 
-      background:
-        var(--surface);
+      background:var(--surface);
 
-      color:
-        var(--text);
+      color:var(--text);
 
     }
 
 
     .mode-pill.active {
 
-      border-color:
-        rgba(217,119,87,.4);
+      border-color:rgba(217,119,87,.4);
 
-      background:
-        var(--accent-soft);
+      background:var(--accent-soft);
 
       color:#efb8a4;
 
@@ -1096,26 +1088,19 @@
        WELCOME COMPOSER
        ====================================================== */
 
-
     .welcome-composer {
 
-      width:
-        min(
-          760px,
-          100%
-        );
+      width:min(760px,100%);
 
       margin-top:22px;
 
       padding:15px;
 
-      border:
-        1px solid var(--border-strong);
+      border:1px solid var(--border-strong);
 
       border-radius:16px;
 
-      background:
-        var(--surface);
+      background:var(--surface);
 
     }
 
@@ -1131,11 +1116,9 @@
 
       outline:none;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--text);
+      color:var(--text);
 
       font-size:.9rem;
 
@@ -1155,8 +1138,7 @@
 
     textarea::placeholder {
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
     }
 
@@ -1167,8 +1149,7 @@
 
       align-items:center;
 
-      justify-content:
-        flex-end;
+      justify-content:flex-end;
 
       margin-top:8px;
 
@@ -1191,8 +1172,7 @@
 
       border-radius:50%;
 
-      background:
-        var(--accent);
+      background:var(--accent);
 
       color:white;
 
@@ -1203,8 +1183,7 @@
 
     .send-button:hover {
 
-      background:
-        var(--accent-hover);
+      background:var(--accent-hover);
 
     }
 
@@ -1222,19 +1201,13 @@
        SUGGESTIONS
        ====================================================== */
 
-
     .suggestion-heading {
 
-      width:
-        min(
-          690px,
-          100%
-        );
+      width:min(690px,100%);
 
       margin-top:27px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.71rem;
 
@@ -1245,21 +1218,14 @@
 
     .suggestions {
 
-      width:
-        min(
-          690px,
-          100%
-        );
+      width:min(690px,100%);
 
       margin-top:9px;
 
       display:grid;
 
       grid-template-columns:
-        repeat(
-          2,
-          minmax(0,1fr)
-        );
+        repeat(2,minmax(0,1fr));
 
       gap:9px;
 
@@ -1268,19 +1234,15 @@
 
     .suggestion {
 
-      padding:
-        11px 13px;
+      padding:11px 13px;
 
-      border:
-        1px solid var(--border);
+      border:1px solid var(--border);
 
       border-radius:10px;
 
-      background:
-        transparent;
+      background:transparent;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       text-align:left;
 
@@ -1291,43 +1253,32 @@
 
     .suggestion:hover {
 
-      background:
-        var(--surface);
+      background:var(--surface);
 
-      color:
-        var(--text);
+      color:var(--text);
 
     }
 
 
     /* ======================================================
-       ACADEMIC DISCLAIMER
+       DISCLAIMER
        ====================================================== */
-
 
     .academic-disclaimer {
 
-      width:
-        min(
-          690px,
-          100%
-        );
+      width:min(690px,100%);
 
       margin-top:28px;
 
-      padding:
-        13px 15px;
+      padding:13px 15px;
 
-      border:
-        1px solid var(--warning-border);
+      border:1px solid var(--warning-border);
 
       border-radius:10px;
 
-      background:
-        var(--warning-bg);
+      background:var(--warning-bg);
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.66rem;
 
@@ -1349,8 +1300,7 @@
 
     .academic-disclaimer a {
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
       text-decoration:none;
 
@@ -1368,16 +1318,11 @@
 
       display:none;
 
-      width:
-        min(
-          690px,
-          100%
-        );
+      width:min(690px,100%);
 
       margin-top:10px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.64rem;
 
@@ -1399,15 +1344,13 @@
        MESSAGES
        ====================================================== */
 
-
     .message {
 
       width:100%;
 
       margin-bottom:28px;
 
-      animation:
-        fadeIn .18s ease;
+      animation:fadeIn .18s ease;
 
     }
 
@@ -1418,8 +1361,7 @@
 
         opacity:0;
 
-        transform:
-          translateY(3px);
+        transform:translateY(3px);
 
       }
 
@@ -1427,8 +1369,7 @@
 
         opacity:1;
 
-        transform:
-          translateY(0);
+        transform:translateY(0);
 
       }
 
@@ -1439,8 +1380,7 @@
 
       display:flex;
 
-      justify-content:
-        flex-end;
+      justify-content:flex-end;
 
     }
 
@@ -1454,8 +1394,7 @@
 
     .bubble {
 
-      white-space:
-        pre-wrap;
+      white-space:pre-wrap;
 
       line-height:1.72;
 
@@ -1468,14 +1407,12 @@
 
       max-width:78%;
 
-      padding:
-        11px 15px;
+      padding:11px 15px;
 
       border-radius:
         15px 15px 4px 15px;
 
-      background:
-        var(--surface-2);
+      background:var(--surface-2);
 
     }
 
@@ -1498,8 +1435,7 @@
 
       font-size:1.03rem;
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
     }
 
@@ -1507,7 +1443,6 @@
     /* ======================================================
        THINKING
        ====================================================== */
-
 
     .thinking {
 
@@ -1517,8 +1452,7 @@
 
       align-items:center;
 
-      color:
-        var(--muted);
+      color:var(--muted);
 
       font-size:.74rem;
 
@@ -1542,14 +1476,10 @@
 
       border-radius:50%;
 
-      background:
-        var(--muted);
+      background:var(--muted);
 
       animation:
-        pulse
-        1.2s
-        infinite
-        ease-in-out;
+        pulse 1.2s infinite ease-in-out;
 
     }
 
@@ -1591,7 +1521,6 @@
        FLOATING COMPOSER
        ====================================================== */
 
-
     .floating-composer {
 
       display:none;
@@ -1608,9 +1537,7 @@
         24px
         max(
           35px,
-          calc(
-            (100% - 820px) / 2
-          )
+          calc((100% - 820px) / 2)
         )
         21px;
 
@@ -1635,13 +1562,11 @@
 
       padding:14px;
 
-      border:
-        1px solid var(--border-strong);
+      border:1px solid var(--border-strong);
 
       border-radius:15px;
 
-      background:
-        var(--surface);
+      background:var(--surface);
 
     }
 
@@ -1659,8 +1584,7 @@
 
       margin-top:7px;
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       font-size:.59rem;
 
@@ -1671,8 +1595,7 @@
 
     .composer-note a {
 
-      color:
-        var(--muted-2);
+      color:var(--muted-2);
 
       text-decoration:none;
 
@@ -1681,8 +1604,7 @@
 
     .composer-note a:hover {
 
-      color:
-        var(--accent);
+      color:var(--accent);
 
     }
 
@@ -1691,11 +1613,7 @@
        MOBILE
        ====================================================== */
 
-
-    @media(
-      max-width:760px
-    ) {
-
+    @media(max-width:760px) {
 
       .sidebar {
 
@@ -1707,8 +1625,7 @@
 
         z-index:100;
 
-        transition:
-          left .2s ease;
+        transition:left .2s ease;
 
       }
 
@@ -1736,16 +1653,13 @@
 
         height:38px;
 
-        border:
-          1px solid var(--border);
+        border:1px solid var(--border);
 
         border-radius:9px;
 
-        background:
-          var(--surface);
+        background:var(--surface);
 
-        color:
-          var(--text);
+        color:var(--text);
 
       }
 
@@ -1760,8 +1674,7 @@
 
       .suggestions {
 
-        grid-template-columns:
-          1fr;
+        grid-template-columns:1fr;
 
       }
 
@@ -1790,7 +1703,6 @@
        SIDEBAR
        ===================================================== -->
 
-
   <aside
     class="sidebar"
     id="sidebar"
@@ -1800,20 +1712,14 @@
     <div class="brand">
 
       <div class="brand-title">
-
         BioInfo Chat
-
       </div>
 
-
       <div class="brand-subtitle">
-
-        Bioinformatics, Omics & Evolution
-
+        Bioinformatics, Omics &amp; Evolution
       </div>
 
     </div>
-
 
 
     <div class="nav-group">
@@ -1834,7 +1740,6 @@
       </button>
 
 
-
       <button
         id="journalBtn"
         class="nav-item"
@@ -1850,7 +1755,6 @@
       </button>
 
 
-
       <button
         id="freeBtn"
         class="nav-item active"
@@ -1864,7 +1768,6 @@
         Livre
 
       </button>
-
 
 
       <button
@@ -1885,21 +1788,15 @@
     </div>
 
 
-
-    <div class="nav-separator">
-    </div>
-
+    <div class="nav-separator"></div>
 
 
     <label
       class="language-label"
       for="language"
     >
-
       Idioma
-
     </label>
-
 
 
     <select
@@ -1907,68 +1804,46 @@
       class="language-select"
     >
 
-      <option
-        value="pt"
-      >
-
+      <option value="pt">
         Português
-
       </option>
 
-
-      <option
-        value="en"
-      >
-
+      <option value="en">
         English
-
       </option>
 
     </select>
-
 
 
     <button
       class="new-chat"
       onclick="newChat()"
     >
-
       ＋ Nova conversa
-
     </button>
-
 
 
     <!-- ===================================================
          HISTORY
          =================================================== -->
 
-
     <div class="recent">
 
 
       <div class="recent-header">
 
-
         <div class="recent-title">
-
           Conversas recentes
-
         </div>
-
 
         <button
           class="clear-history"
           onclick="clearHistory()"
         >
-
           Limpar
-
         </button>
 
-
       </div>
-
 
 
       <div
@@ -1981,147 +1856,89 @@
     </div>
 
 
-
     <!-- ===================================================
          SIDEBAR BOTTOM
          =================================================== -->
 
-
     <div class="sidebar-bottom">
-
-
-
-      <!-- ABOUT -->
 
 
       <div class="about-sidebar">
 
-
         <h3>
-
           Sobre o BioInfo Chat
-
         </h3>
 
-
         <p>
-
           Ferramenta acadêmica experimental
           para apoio ao ensino e estudo em
           Bioinformática, Ômicas e Evolução.
-
           As respostas devem ser avaliadas
           criticamente e confrontadas com
-          literatura científica e
-          documentação especializada.
-
+          literatura científica e documentação
+          especializada.
         </p>
-
 
         <a
           href="https://tiagobelintani.github.io/bioinfo-chat.html"
           target="_blank"
           rel="noopener"
         >
-
           Saiba mais →
-
         </a>
-
 
       </div>
 
 
-
-      <!-- CREATOR -->
-
-
       <div class="creator-card">
-
 
         <div class="creator-main">
 
-
           <div class="creator-label">
-
             Criado por
-
           </div>
-
 
           <div class="creator-name">
-
             Tiago Belintani
-
           </div>
-
 
         </div>
 
 
-
         <div class="creator-links">
-
 
           <a
             href="https://tiagobelintani.github.io/"
             target="_blank"
             rel="noopener"
           >
-
             Website
-
           </a>
-
 
           <a
             href="https://github.com/TiagoBelintani/bioinfo-chat"
             target="_blank"
             rel="noopener"
           >
-
             GitHub
-
           </a>
 
-
         </div>
-
 
       </div>
 
 
-
-      <!-- LEGAL -->
-
-
       <div class="legal-links">
 
-
-        <a
-          href="privacy.html"
-        >
-
+        <a href="privacy.html">
           Privacy
-
         </a>
 
+        <span>·</span>
 
-        <span>
-
-          ·
-
-        </span>
-
-
-        <a
-          href="terms.html"
-        >
-
+        <a href="terms.html">
           Terms &amp; Disclaimer
-
         </a>
-
 
       </div>
 
@@ -2132,11 +1949,9 @@
   </aside>
 
 
-
   <!-- =====================================================
        MAIN
        ===================================================== -->
-
 
   <main class="main">
 
@@ -2146,27 +1961,15 @@
       onclick="toggleSidebar()"
       aria-label="Abrir menu"
     >
-
       ☰
-
     </button>
-
 
 
     <div
       class="chat-area"
       id="chat"
     >
-
-      <!-- Filled by JavaScript -->
-
     </div>
-
-
-
-    <!-- ===================================================
-         FLOATING COMPOSER
-         =================================================== -->
 
 
     <div
@@ -2185,9 +1988,7 @@
         ></textarea>
 
 
-
         <div class="composer-bottom">
-
 
           <button
             id="sendButton"
@@ -2195,14 +1996,10 @@
             onclick="send()"
             aria-label="Enviar pergunta"
           >
-
             ↑
-
           </button>
 
-
         </div>
-
 
 
         <div class="composer-note">
@@ -2211,17 +2008,13 @@
           não publicadas, sensíveis ou pessoais.
 
           <a href="privacy.html">
-
             Privacy
-
           </a>
 
           ·
 
           <a href="terms.html">
-
             Terms
-
           </a>
 
         </div>
@@ -2239,14 +2032,12 @@
 </div>
 
 
-
 <script>
 
 
 /* =========================================================
    STATE
    ========================================================= */
-
 
 let mode =
   "free";
@@ -2272,11 +2063,9 @@ const STORAGE_KEY =
   "bioinfo_chat_conversations_v1";
 
 
-
 /* =========================================================
    PROMPTS
    ========================================================= */
-
 
 const PROMPTS = {
 
@@ -2303,7 +2092,6 @@ const PROMPTS = {
 
 
   },
-
 
 
   en: {
@@ -2333,64 +2121,46 @@ const PROMPTS = {
 };
 
 
-
 /* =========================================================
    STORAGE
    ========================================================= */
 
-
 function getConversations() {
-
 
   try {
 
-
     return JSON.parse(
-
       localStorage.getItem(
         STORAGE_KEY
       )
-
     ) || [];
-
 
   } catch {
 
-
     return [];
-
 
   }
 
-
 }
-
 
 
 function saveConversations(
   conversations
 ) {
 
-
   localStorage.setItem(
-
     STORAGE_KEY,
-
     JSON.stringify(
       conversations
     )
-
   );
 
-
 }
-
 
 
 function createConversation(
   firstMessage
 ) {
-
 
   const conversations =
     getConversations();
@@ -2398,37 +2168,25 @@ function createConversation(
 
   const conversation = {
 
-
     id:
-      Date.now()
-        .toString(),
-
+      Date.now().toString(),
 
     title:
-      makeTitle(
-        firstMessage
-      ),
-
+      makeTitle(firstMessage),
 
     createdAt:
       Date.now(),
 
-
     updatedAt:
       Date.now(),
 
-
     tool,
-
 
     mode,
 
-
     language,
 
-
     messages: []
-
 
   };
 
@@ -2452,22 +2210,16 @@ function createConversation(
 
   return conversation;
 
-
 }
-
 
 
 function makeTitle(
   text
 ) {
 
-
   const clean =
     text
-      .replace(
-        /\s+/g,
-        " "
-      )
+      .replace(/\s+/g," ")
       .trim();
 
 
@@ -2475,37 +2227,27 @@ function makeTitle(
     clean.length <= 40
   ) {
 
-
     return clean;
-
 
   }
 
 
   return (
-    clean.slice(
-      0,
-      40
-    )
+    clean.slice(0,40)
     +
     "…"
   );
 
-
 }
 
 
-
 function getActiveConversation() {
-
 
   if (
     !activeConversationId
   ) {
 
-
     return null;
-
 
   }
 
@@ -2513,25 +2255,20 @@ function getActiveConversation() {
   return (
     getConversations()
       .find(
-
         item =>
           item.id ===
           activeConversationId
-
       )
       ||
       null
   );
 
-
 }
-
 
 
 function updateConversation(
   conversation
 ) {
-
 
   const conversations =
     getConversations();
@@ -2539,11 +2276,9 @@ function updateConversation(
 
   const index =
     conversations.findIndex(
-
       item =>
         item.id ===
         conversation.id
-
     );
 
 
@@ -2551,9 +2286,7 @@ function updateConversation(
     index === -1
   ) {
 
-
     return;
-
 
   }
 
@@ -2567,11 +2300,9 @@ function updateConversation(
 
 
   conversations.sort(
-
     (a,b) =>
       b.updatedAt -
       a.updatedAt
-
   );
 
 
@@ -2582,18 +2313,14 @@ function updateConversation(
 
   renderRecent();
 
-
 }
 
 
-
 /* =========================================================
-   HISTORY SIDEBAR
+   HISTORY
    ========================================================= */
 
-
 function renderRecent() {
-
 
   const container =
     document.getElementById(
@@ -2612,7 +2339,6 @@ function renderRecent() {
   if (
     !conversations.length
   ) {
-
 
     const empty =
       document.createElement(
@@ -2635,17 +2361,12 @@ function renderRecent() {
 
     return;
 
-
   }
 
 
   conversations
-    .slice(
-      0,
-      8
-    )
+    .slice(0,8)
     .forEach(
-
       conversation => {
 
 
@@ -2657,7 +2378,6 @@ function renderRecent() {
 
         row.className =
           "recent-row";
-
 
 
         const button =
@@ -2675,11 +2395,9 @@ function renderRecent() {
           activeConversationId
         ) {
 
-
           button.classList.add(
             "active"
           );
-
 
         }
 
@@ -2693,7 +2411,6 @@ function renderRecent() {
             loadConversation(
               conversation.id
             );
-
 
 
         const remove =
@@ -2717,14 +2434,11 @@ function renderRecent() {
         remove.onclick =
           event => {
 
-
             event.stopPropagation();
-
 
             deleteConversation(
               conversation.id
             );
-
 
           };
 
@@ -2743,20 +2457,15 @@ function renderRecent() {
           row
         );
 
-
       }
-
     );
 
-
 }
-
 
 
 function deleteConversation(
   id
 ) {
-
 
   let conversations =
     getConversations();
@@ -2764,10 +2473,8 @@ function deleteConversation(
 
   conversations =
     conversations.filter(
-
       item =>
         item.id !== id
-
     );
 
 
@@ -2780,26 +2487,20 @@ function deleteConversation(
     activeConversationId === id
   ) {
 
-
     activeConversationId =
       null;
 
-
     showWelcome();
-
 
   }
 
 
   renderRecent();
 
-
 }
 
 
-
 function clearHistory() {
-
 
   const conversations =
     getConversations();
@@ -2809,9 +2510,7 @@ function clearHistory() {
     !conversations.length
   ) {
 
-
     return;
-
 
   }
 
@@ -2826,9 +2525,7 @@ function clearHistory() {
     !confirmed
   ) {
 
-
     return;
-
 
   }
 
@@ -2847,28 +2544,22 @@ function clearHistory() {
 
   showWelcome();
 
-
 }
-
 
 
 /* =========================================================
    LOAD CONVERSATION
    ========================================================= */
 
-
 function loadConversation(
   id
 ) {
 
-
   const conversation =
     getConversations()
       .find(
-
         item =>
           item.id === id
-
       );
 
 
@@ -2876,9 +2567,7 @@ function loadConversation(
     !conversation
   ) {
 
-
     return;
-
 
   }
 
@@ -2928,23 +2617,15 @@ function loadConversation(
 
   conversation.messages
     .forEach(
-
       message => {
 
-
         addMessage(
-
           message.content,
-
           message.role,
-
           false
-
         );
 
-
       }
-
     );
 
 
@@ -2965,18 +2646,14 @@ function loadConversation(
 
   scrollBottom();
 
-
 }
-
 
 
 /* =========================================================
    WELCOME
    ========================================================= */
 
-
 function showWelcome() {
-
 
   const chat =
     document.getElementById(
@@ -2991,98 +2668,72 @@ function showWelcome() {
       id="welcome"
     >
 
-
       <h1>
-
         BioInfo Chat
-
       </h1>
-
 
       <div
         class="welcome-subtitle"
       >
-
         Bioinformatics, Omics & Evolution
-
       </div>
-
 
       <div
         class="accent-line"
       >
       </div>
 
-
       <div
         class="welcome-description"
       >
-
         Faça perguntas, explore conceitos,
         métodos e análises em bioinformática,
         ômicas e evolução.
-
       </div>
-
 
 
       <div
         class="mode-buttons"
       >
 
-
         <button
           id="homeChatBtn"
           class="mode-pill"
           onclick="setTool('chat')"
         >
-
           Chat
-
         </button>
-
 
         <button
           id="homeJournalBtn"
           class="mode-pill"
           onclick="setTool('journals')"
         >
-
           Periódicos
-
         </button>
-
 
         <button
           id="homeFreeBtn"
           class="mode-pill"
           onclick="setMode('free')"
         >
-
           Livre
-
         </button>
-
 
         <button
           id="homeDiscBtn"
           class="mode-pill"
           onclick="setMode('discipline')"
         >
-
           Disciplina
-
         </button>
 
-
       </div>
-
 
 
       <div
         class="welcome-composer"
       >
-
 
         <textarea
           id="homeInput"
@@ -3090,11 +2741,9 @@ function showWelcome() {
           rows="2"
         ></textarea>
 
-
         <div
           class="composer-bottom"
         >
-
 
           <button
             id="homeSend"
@@ -3102,33 +2751,24 @@ function showWelcome() {
             onclick="sendFromHome()"
             aria-label="Enviar pergunta"
           >
-
             ↑
-
           </button>
-
 
         </div>
 
-
       </div>
-
 
 
       <div
         class="suggestion-heading"
       >
-
         Sugestões para começar
-
       </div>
-
 
 
       <div
         class="suggestions"
       >
-
 
         <button
           class="suggestion"
@@ -3136,12 +2776,8 @@ function showWelcome() {
             'Explique alinhamento de sequências.'
           )"
         >
-
           Explicar alinhamento de sequências
-
         </button>
-
-
 
         <button
           class="suggestion"
@@ -3149,12 +2785,8 @@ function showWelcome() {
             'Quais são as principais ferramentas para filogenômica e quando devo usar cada uma?'
           )"
         >
-
           Ferramentas para filogenômica
-
         </button>
-
-
 
         <button
           class="suggestion"
@@ -3162,12 +2794,8 @@ function showWelcome() {
             'Explique um pipeline de RNA-Seq passo a passo.'
           )"
         >
-
           Pipeline de RNA-Seq passo a passo
-
         </button>
-
-
 
         <button
           class="suggestion"
@@ -3175,14 +2803,10 @@ function showWelcome() {
             'Sugira periódicos potencialmente compatíveis com um estudo genômico.'
           )"
         >
-
           Periódicos para estudos genômicos
-
         </button>
 
-
       </div>
-
 
 
       <div
@@ -3217,7 +2841,6 @@ function showWelcome() {
       </div>
 
 
-
       <div
         class="journal-warning"
         id="journalWarning"
@@ -3232,7 +2855,6 @@ function showWelcome() {
         no site oficial do periódico.
 
       </div>
-
 
     </div>
 
@@ -3255,11 +2877,8 @@ function showWelcome() {
 
 
   homeInput.addEventListener(
-
     "keydown",
-
     event => {
-
 
       if (
         event.key === "Enter"
@@ -3267,18 +2886,13 @@ function showWelcome() {
         !event.shiftKey
       ) {
 
-
         event.preventDefault();
-
 
         sendFromHome();
 
-
       }
 
-
     }
-
   );
 
 
@@ -3290,20 +2904,16 @@ function showWelcome() {
 
   updateJournalWarning();
 
-
 }
-
 
 
 /* =========================================================
    MODE / TOOL
    ========================================================= */
 
-
 function setTool(
   selectedTool
 ) {
-
 
   tool =
     selectedTool;
@@ -3317,15 +2927,12 @@ function setTool(
 
   updateJournalWarning();
 
-
 }
-
 
 
 function setMode(
   selectedMode
 ) {
-
 
   mode =
     selectedMode;
@@ -3333,72 +2940,58 @@ function setMode(
 
   syncButtons();
 
-
 }
-
 
 
 function syncButtons() {
 
-
   const pairs = [
-
 
     [
       "chatBtn",
       tool === "chat"
     ],
 
-
     [
       "journalBtn",
       tool === "journals"
     ],
-
 
     [
       "freeBtn",
       mode === "free"
     ],
 
-
     [
       "discBtn",
       mode === "discipline"
     ],
-
 
     [
       "homeChatBtn",
       tool === "chat"
     ],
 
-
     [
       "homeJournalBtn",
       tool === "journals"
     ],
-
 
     [
       "homeFreeBtn",
       mode === "free"
     ],
 
-
     [
       "homeDiscBtn",
       mode === "discipline"
     ]
 
-
   ];
 
 
   pairs.forEach(
-
     ([id,active]) => {
-
 
       const element =
         document.getElementById(
@@ -3410,7 +3003,6 @@ function syncButtons() {
         element
       ) {
 
-
         element
           .classList
           .toggle(
@@ -3418,21 +3010,15 @@ function syncButtons() {
             active
           );
 
-
       }
 
-
     }
-
   );
-
 
 }
 
 
-
 function updateJournalWarning() {
-
 
   const warning =
     document.getElementById(
@@ -3444,41 +3030,30 @@ function updateJournalWarning() {
     !warning
   ) {
 
-
     return;
-
 
   }
 
 
   warning.classList.toggle(
-
     "visible",
-
     tool === "journals"
-
   );
 
-
 }
-
 
 
 /* =========================================================
    LANGUAGE
    ========================================================= */
 
-
 document
   .getElementById(
     "language"
   )
   .addEventListener(
-
     "change",
-
     event => {
-
 
       language =
         event.target.value;
@@ -3486,15 +3061,11 @@ document
 
       updatePlaceholders();
 
-
     }
-
   );
 
 
-
 function updatePlaceholders() {
-
 
   const placeholder =
 
@@ -3503,33 +3074,21 @@ function updatePlaceholders() {
       ?
 
       (
-
         language === "pt"
-
           ?
-
           "Cole aqui o resumo do artigo..."
-
           :
-
           "Paste your manuscript abstract here..."
-
       )
 
       :
 
       (
-
         language === "pt"
-
           ?
-
           "Digite sua pergunta..."
-
           :
-
           "Ask your question..."
-
       );
 
 
@@ -3543,10 +3102,8 @@ function updatePlaceholders() {
     input
   ) {
 
-
     input.placeholder =
       placeholder;
-
 
   }
 
@@ -3561,25 +3118,19 @@ function updatePlaceholders() {
     homeInput
   ) {
 
-
     homeInput.placeholder =
       placeholder;
 
-
   }
 
-
 }
-
 
 
 /* =========================================================
    CHAT RENDERING
    ========================================================= */
 
-
 function prepareChat() {
-
 
   const welcome =
     document.getElementById(
@@ -3591,9 +3142,7 @@ function prepareChat() {
     welcome
   ) {
 
-
     welcome.remove();
-
 
   }
 
@@ -3606,9 +3155,7 @@ function prepareChat() {
       "visible"
     );
 
-
 }
-
 
 
 function addMessage(
@@ -3616,7 +3163,6 @@ function addMessage(
   role,
   scroll = true
 ) {
-
 
   prepareChat();
 
@@ -3635,7 +3181,6 @@ function addMessage(
     role === "assistant"
   ) {
 
-
     const name =
       document.createElement(
         "div"
@@ -3653,7 +3198,6 @@ function addMessage(
     message.appendChild(
       name
     );
-
 
   }
 
@@ -3690,24 +3234,18 @@ function addMessage(
     scroll
   ) {
 
-
     scrollBottom();
-
 
   }
 
-
 }
-
 
 
 /* =========================================================
    THINKING
    ========================================================= */
 
-
 function addThinking() {
-
 
   prepareChat();
 
@@ -3731,11 +3269,8 @@ function addThinking() {
     <div
       class="assistant-name"
     >
-
       BioInfo Chat
-
     </div>
-
 
     <div
       class="thinking"
@@ -3746,13 +3281,9 @@ function addThinking() {
       <div
         class="dots"
       >
-
         <span></span>
-
         <span></span>
-
         <span></span>
-
       </div>
 
     </div>
@@ -3771,13 +3302,10 @@ function addThinking() {
 
   scrollBottom();
 
-
 }
 
 
-
 function removeThinking() {
-
 
   document
     .getElementById(
@@ -3785,13 +3313,10 @@ function removeThinking() {
     )
     ?.remove();
 
-
 }
 
 
-
 function scrollBottom() {
-
 
   const chat =
     document.getElementById(
@@ -3802,28 +3327,22 @@ function scrollBottom() {
   chat.scrollTop =
     chat.scrollHeight;
 
-
 }
-
 
 
 /* =========================================================
    SEND
    ========================================================= */
 
-
 async function sendText(
   text
 ) {
-
 
   if (
     isSending
   ) {
 
-
     return;
-
 
   }
 
@@ -3836,9 +3355,7 @@ async function sendText(
     !text
   ) {
 
-
     return;
-
 
   }
 
@@ -3851,12 +3368,10 @@ async function sendText(
     !conversation
   ) {
 
-
     conversation =
       createConversation(
         text
       );
-
 
   }
 
@@ -3875,11 +3390,9 @@ async function sendText(
 
   conversation.messages.push({
 
-    role:
-      "user",
+    role:"user",
 
-    content:
-      text
+    content:text
 
   });
 
@@ -3935,9 +3448,7 @@ async function sendText(
     const recentMessages =
       conversation
         .messages
-        .slice(
-          -12
-        );
+        .slice(-12);
 
 
     const response =
@@ -3947,50 +3458,34 @@ async function sendText(
 
         {
 
+          method:"POST",
 
-          method:
-            "POST",
-
-
-          headers: {
-
+          headers:{
 
             "Content-Type":
               "application/json"
 
-
           },
-
 
           body:
             JSON.stringify({
 
-
               messages:[
-
 
                 {
 
-
-                  role:
-                    "system",
-
+                  role:"system",
 
                   content:
                     systemPrompt
 
-
                 },
-
 
                 ...recentMessages
 
-
               ]
 
-
             })
-
 
         }
 
@@ -4008,27 +3503,19 @@ async function sendText(
       !response.ok
     ) {
 
-
       const errorMessage =
-
         data?.error?.message
-
         ||
-
         "Não foi possível gerar a resposta.";
 
 
       addMessage(
-
         `Erro: ${errorMessage}`,
-
         "assistant"
-
       );
 
 
       return;
-
 
     }
 
@@ -4040,20 +3527,14 @@ async function sendText(
 
 
     const answer =
-
       reply
-
       ||
-
       "Não foi possível gerar uma resposta.";
 
 
     addMessage(
-
       answer,
-
       "assistant"
-
     );
 
 
@@ -4065,17 +3546,11 @@ async function sendText(
       conversation
     ) {
 
-
       conversation.messages.push({
 
+        role:"assistant",
 
-        role:
-          "assistant",
-
-
-        content:
-          answer
-
+        content:answer
 
       });
 
@@ -4083,7 +3558,6 @@ async function sendText(
       updateConversation(
         conversation
       );
-
 
     }
 
@@ -4097,11 +3571,8 @@ async function sendText(
 
 
     addMessage(
-
       "Não foi possível conectar ao serviço. Tente novamente.",
-
       "assistant"
-
     );
 
 
@@ -4129,18 +3600,14 @@ async function sendText(
 
   }
 
-
 }
-
 
 
 /* =========================================================
    INPUT ACTIONS
    ========================================================= */
 
-
 function sendFromHome() {
-
 
   const input =
     document.getElementById(
@@ -4160,13 +3627,10 @@ function sendFromHome() {
     text
   );
 
-
 }
 
 
-
 function send() {
-
 
   const input =
     document.getElementById(
@@ -4186,32 +3650,25 @@ function send() {
     text
   );
 
-
 }
-
 
 
 function quickPrompt(
   text
 ) {
 
-
   sendText(
     text
   );
 
-
 }
-
 
 
 /* =========================================================
    NEW CHAT
    ========================================================= */
 
-
 function newChat() {
-
 
   activeConversationId =
     null;
@@ -4233,26 +3690,20 @@ function newChat() {
 
   renderRecent();
 
-
 }
-
 
 
 /* =========================================================
    ENTER
    ========================================================= */
 
-
 document
   .getElementById(
     "input"
   )
   .addEventListener(
-
     "keydown",
-
     event => {
-
 
       if (
         event.key === "Enter"
@@ -4260,29 +3711,21 @@ document
         !event.shiftKey
       ) {
 
-
         event.preventDefault();
-
 
         send();
 
-
       }
 
-
     }
-
   );
-
 
 
 /* =========================================================
    MOBILE
    ========================================================= */
 
-
 function toggleSidebar() {
-
 
   document
     .getElementById(
@@ -4292,21 +3735,16 @@ function toggleSidebar() {
       "open"
     );
 
-
 }
-
 
 
 /* =========================================================
    INITIALIZATION
    ========================================================= */
 
-
 renderRecent();
 
-
 showWelcome();
-
 
 </script>
 
