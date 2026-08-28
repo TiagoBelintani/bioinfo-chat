@@ -1,871 +1,1617 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>BioInfo Chat — Bioinformatics, Omics & Evolution</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>
+    BioInfo Chat — Bioinformatics, Omics & Evolution
+  </title>
+
+  <meta
+    name="description"
+    content="BioInfo Chat is an experimental academic tool for Bioinformatics, Omics and Evolution."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow"
+  >
+
+
+  <!-- Fonts -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
   >
 
+
   <style>
+
     :root {
-      --bg: #181817;
-      --sidebar: #1d1d1b;
-      --surface: #232321;
-      --surface-2: #292825;
-      --surface-hover: #302e2a;
 
-      --border: rgba(255,255,255,.09);
-      --border-strong: rgba(255,255,255,.14);
+      --bg:#181817;
 
-      --text: #f1eee8;
-      --muted: #aaa59d;
-      --muted-2: #77736d;
+      --sidebar:#1d1d1b;
 
-      --accent: #d97757;
-      --accent-hover: #e18463;
-      --accent-soft: rgba(217,119,87,.12);
+      --surface:#232321;
 
-      --sidebar-width: 320px;
+      --surface-2:#292825;
+
+      --surface-hover:#302e2a;
+
+      --border:
+        rgba(255,255,255,.09);
+
+      --border-strong:
+        rgba(255,255,255,.14);
+
+      --text:#f1eee8;
+
+      --muted:#aaa59d;
+
+      --muted-2:#77736d;
+
+      --accent:#d97757;
+
+      --accent-hover:#e18463;
+
+      --accent-soft:
+        rgba(217,119,87,.12);
+
+      --warning-bg:
+        rgba(217,119,87,.07);
+
+      --warning-border:
+        rgba(217,119,87,.20);
+
+      --sidebar-width:320px;
+
     }
+
 
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+
+      box-sizing:border-box;
+
+      margin:0;
+
+      padding:0;
+
     }
+
 
     html,
     body {
-      width: 100%;
-      height: 100%;
+
+      width:100%;
+
+      height:100%;
+
     }
 
+
     body {
-      font-family: "Inter", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow: hidden;
+
+      font-family:
+        "Inter",
+        system-ui,
+        sans-serif;
+
+      background:
+        var(--bg);
+
+      color:
+        var(--text);
+
+      overflow:hidden;
+
     }
+
 
     button,
     textarea,
     select {
-      font: inherit;
+
+      font:inherit;
+
     }
+
 
     button,
     select {
-      cursor: pointer;
+
+      cursor:pointer;
+
     }
 
+
     a {
-      color: inherit;
+
+      color:inherit;
+
     }
+
 
     /* ======================================================
        APP
        ====================================================== */
 
+
     .app {
-      display: flex;
-      width: 100%;
-      height: 100vh;
+
+      display:flex;
+
+      width:100%;
+
+      height:100vh;
+
     }
+
 
     /* ======================================================
        SIDEBAR
        ====================================================== */
 
+
     .sidebar {
-      width: var(--sidebar-width);
-      min-width: var(--sidebar-width);
-      height: 100vh;
 
-      display: flex;
-      flex-direction: column;
+      width:
+        var(--sidebar-width);
 
-      padding: 22px 20px;
+      min-width:
+        var(--sidebar-width);
 
-      background: var(--sidebar);
-      border-right: 1px solid var(--border);
+      height:100vh;
 
-      overflow-y: auto;
+      display:flex;
+
+      flex-direction:column;
+
+      padding:
+        22px 20px;
+
+      background:
+        var(--sidebar);
+
+      border-right:
+        1px solid var(--border);
+
+      overflow-y:auto;
+
     }
+
 
     .sidebar::-webkit-scrollbar {
-      width: 5px;
+
+      width:5px;
+
     }
 
+
     .sidebar::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,.07);
-      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,.07);
+
+      border-radius:10px;
+
     }
+
 
     /* ======================================================
        BRAND
        ====================================================== */
 
+
     .brand {
-      margin-bottom: 25px;
+
+      margin-bottom:25px;
+
     }
+
 
     .brand-title {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: 1.75rem;
-      font-weight: 400;
-      line-height: 1;
+
+      font-family:
+        "Instrument Serif",
+        Georgia,
+        serif;
+
+      font-size:1.75rem;
+
+      font-weight:400;
+
+      line-height:1;
+
     }
 
+
     .brand-subtitle {
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: .73rem;
+
+      margin-top:7px;
+
+      color:
+        var(--muted);
+
+      font-size:.73rem;
+
     }
+
 
     /* ======================================================
        NAVIGATION
        ====================================================== */
 
+
     .nav-group {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:2px;
+
     }
 
+
     .nav-item {
-      width: 100%;
 
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      width:100%;
 
-      padding: 11px 13px;
+      display:flex;
 
-      border: 0;
-      border-radius: 9px;
+      align-items:center;
 
-      background: transparent;
-      color: var(--muted);
+      gap:12px;
 
-      text-align: left;
+      padding:
+        11px 13px;
+
+      border:0;
+
+      border-radius:9px;
+
+      background:
+        transparent;
+
+      color:
+        var(--muted);
+
+      text-align:left;
 
       transition:
         background .15s ease,
         color .15s ease;
+
     }
+
 
     .nav-item:hover {
-      background: var(--surface-hover);
-      color: var(--text);
+
+      background:
+        var(--surface-hover);
+
+      color:
+        var(--text);
+
     }
+
 
     .nav-item.active {
-      background: var(--accent-soft);
-      color: #efb8a4;
+
+      background:
+        var(--accent-soft);
+
+      color:#efb8a4;
+
     }
+
 
     .nav-icon {
-      width: 20px;
-      text-align: center;
+
+      width:20px;
+
+      text-align:center;
+
     }
 
+
     .nav-separator {
-      height: 1px;
-      background: var(--border);
-      margin: 20px 0;
+
+      height:1px;
+
+      background:
+        var(--border);
+
+      margin:
+        20px 0;
+
     }
+
 
     /* ======================================================
        LANGUAGE
        ====================================================== */
 
-    .language-label,
-    .section-label {
-      display: block;
 
-      margin-bottom: 8px;
+    .language-label {
 
-      color: var(--muted-2);
+      display:block;
 
-      font-size: .67rem;
-      font-weight: 600;
+      margin-bottom:8px;
 
-      letter-spacing: .08em;
-      text-transform: uppercase;
+      color:
+        var(--muted-2);
+
+      font-size:.67rem;
+
+      font-weight:600;
+
+      letter-spacing:.08em;
+
+      text-transform:uppercase;
+
     }
+
 
     .language-select {
-      width: 100%;
 
-      padding: 10px 12px;
+      width:100%;
 
-      border: 1px solid var(--border);
-      border-radius: 9px;
+      padding:
+        10px 12px;
 
-      background: transparent;
-      color: var(--text);
+      border:
+        1px solid var(--border);
 
-      outline: none;
+      border-radius:9px;
+
+      background:
+        transparent;
+
+      color:
+        var(--text);
+
+      outline:none;
+
     }
+
 
     .language-select option {
-      background: var(--surface);
-      color: var(--text);
+
+      background:
+        var(--surface);
+
+      color:
+        var(--text);
+
     }
+
 
     /* ======================================================
        NEW CHAT
        ====================================================== */
 
+
     .new-chat {
-      width: 100%;
 
-      margin-top: 17px;
-      padding: 12px 14px;
+      width:100%;
 
-      border: 0;
-      border-radius: 8px;
+      margin-top:17px;
 
-      background: var(--accent);
-      color: white;
+      padding:
+        12px 14px;
 
-      font-weight: 500;
+      border:0;
+
+      border-radius:8px;
+
+      background:
+        var(--accent);
+
+      color:white;
+
+      font-weight:500;
 
       transition:
         background .15s ease,
         transform .15s ease;
+
     }
 
+
     .new-chat:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
+
+      background:
+        var(--accent-hover);
+
+      transform:
+        translateY(-1px);
+
     }
+
 
     /* ======================================================
        RECENT CONVERSATIONS
        ====================================================== */
 
+
     .recent {
-      margin-top: 25px;
+
+      margin-top:25px;
+
     }
+
 
     .recent-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
 
-      margin-bottom: 8px;
+      display:flex;
+
+      align-items:center;
+
+      justify-content:
+        space-between;
+
+      margin-bottom:8px;
+
     }
+
 
     .recent-title {
-      color: var(--muted);
-      font-size: .7rem;
+
+      color:
+        var(--muted);
+
+      font-size:.7rem;
+
     }
+
 
     .clear-history {
-      border: 0;
-      background: transparent;
 
-      color: var(--muted-2);
-      font-size: .64rem;
+      border:0;
+
+      background:
+        transparent;
+
+      color:
+        var(--muted-2);
+
+      font-size:.64rem;
+
     }
+
 
     .clear-history:hover {
-      color: var(--accent);
+
+      color:
+        var(--accent);
+
     }
+
 
     .recent-list {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:2px;
+
     }
+
 
     .recent-empty {
-      padding: 7px 2px;
 
-      color: var(--muted-2);
+      padding:
+        7px 2px;
 
-      font-size: .68rem;
-      line-height: 1.5;
+      color:
+        var(--muted-2);
+
+      font-size:.68rem;
+
+      line-height:1.5;
+
     }
+
 
     .recent-row {
-      display: flex;
-      align-items: center;
 
-      min-width: 0;
+      display:flex;
+
+      align-items:center;
+
+      min-width:0;
+
     }
+
 
     .recent-item {
-      flex: 1;
-      min-width: 0;
 
-      border: 0;
-      border-radius: 7px;
+      flex:1;
 
-      padding: 8px 7px;
+      min-width:0;
 
-      background: transparent;
-      color: var(--muted);
+      border:0;
 
-      font-size: .69rem;
-      text-align: left;
+      border-radius:7px;
 
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      padding:
+        8px 7px;
+
+      background:
+        transparent;
+
+      color:
+        var(--muted);
+
+      font-size:.69rem;
+
+      text-align:left;
+
+      white-space:nowrap;
+
+      overflow:hidden;
+
+      text-overflow:ellipsis;
+
     }
+
 
     .recent-item:hover,
     .recent-item.active {
-      background: var(--surface-hover);
-      color: var(--text);
+
+      background:
+        var(--surface-hover);
+
+      color:
+        var(--text);
+
     }
 
+
     .delete-chat {
-      width: 25px;
-      height: 25px;
 
-      flex: 0 0 auto;
+      width:25px;
 
-      border: 0;
-      border-radius: 6px;
+      height:25px;
 
-      background: transparent;
-      color: var(--muted-2);
+      flex:
+        0 0 auto;
 
-      opacity: 0;
+      border:0;
+
+      border-radius:6px;
+
+      background:
+        transparent;
+
+      color:
+        var(--muted-2);
+
+      opacity:0;
 
       transition:
         opacity .15s ease,
         background .15s ease;
+
     }
 
-    .recent-row:hover .delete-chat {
-      opacity: 1;
+
+    .recent-row:hover
+    .delete-chat {
+
+      opacity:1;
+
     }
+
 
     .delete-chat:hover {
-      background: rgba(255,255,255,.05);
-      color: var(--accent);
+
+      background:
+        rgba(255,255,255,.05);
+
+      color:
+        var(--accent);
+
     }
+
 
     /* ======================================================
        SIDEBAR BOTTOM
        ====================================================== */
 
+
     .sidebar-bottom {
-      margin-top: auto;
-      padding-top: 24px;
+
+      margin-top:auto;
+
+      padding-top:24px;
+
     }
+
 
     /* ======================================================
-       ABOUT - NOW INSIDE SIDEBAR
+       ABOUT
        ====================================================== */
 
+
     .about-sidebar {
-      margin-bottom: 12px;
 
-      padding: 14px;
+      margin-bottom:12px;
 
-      border: 1px solid var(--border);
-      border-radius: 11px;
+      padding:14px;
 
-      background: rgba(255,255,255,.02);
+      border:
+        1px solid var(--border);
+
+      border-radius:11px;
+
+      background:
+        rgba(255,255,255,.02);
+
     }
+
 
     .about-sidebar h3 {
-      margin-bottom: 7px;
 
-      color: var(--text);
+      margin-bottom:7px;
 
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: 1.05rem;
-      font-weight: 400;
+      color:
+        var(--text);
+
+      font-family:
+        "Instrument Serif",
+        Georgia,
+        serif;
+
+      font-size:1.05rem;
+
+      font-weight:400;
+
     }
+
 
     .about-sidebar p {
-      color: var(--muted);
 
-      font-size: .67rem;
-      line-height: 1.55;
+      color:
+        var(--muted);
+
+      font-size:.67rem;
+
+      line-height:1.55;
+
     }
+
 
     .about-sidebar a {
-      display: inline-block;
 
-      margin-top: 9px;
+      display:inline-block;
 
-      color: var(--accent);
+      margin-top:9px;
 
-      font-size: .67rem;
+      color:
+        var(--accent);
 
-      text-decoration: none;
+      font-size:.67rem;
+
+      text-decoration:none;
+
     }
+
+
+    .about-sidebar a:hover {
+
+      text-decoration:underline;
+
+    }
+
 
     /* ======================================================
        CREATOR
        ====================================================== */
 
+
     .creator-card {
-      border: 1px solid var(--border);
-      border-radius: 11px;
 
-      overflow: hidden;
+      border:
+        1px solid var(--border);
 
-      background: rgba(255,255,255,.02);
+      border-radius:11px;
+
+      overflow:hidden;
+
+      background:
+        rgba(255,255,255,.02);
+
     }
+
 
     .creator-main {
-      padding: 13px;
+
+      padding:13px;
+
     }
+
 
     .creator-label {
-      margin-bottom: 4px;
 
-      color: var(--muted-2);
+      margin-bottom:4px;
 
-      font-size: .62rem;
+      color:
+        var(--muted-2);
+
+      font-size:.62rem;
+
     }
+
 
     .creator-name {
-      color: var(--text);
 
-      font-size: .78rem;
-      font-weight: 600;
+      color:
+        var(--text);
+
+      font-size:.78rem;
+
+      font-weight:600;
+
     }
+
 
     .creator-links {
-      display: flex;
 
-      border-top: 1px solid var(--border);
+      display:flex;
+
+      border-top:
+        1px solid var(--border);
+
     }
+
 
     .creator-links a {
-      flex: 1;
 
-      padding: 10px;
+      flex:1;
 
-      color: var(--muted);
+      padding:10px;
 
-      text-align: center;
-      text-decoration: none;
+      color:
+        var(--muted);
 
-      font-size: .66rem;
+      text-align:center;
+
+      text-decoration:none;
+
+      font-size:.66rem;
+
     }
+
 
     .creator-links a:hover {
-      color: var(--accent);
+
+      color:
+        var(--accent);
+
     }
 
+
     .creator-links a + a {
-      border-left: 1px solid var(--border);
+
+      border-left:
+        1px solid var(--border);
+
     }
+
+
+    /* ======================================================
+       LEGAL LINKS
+       ====================================================== */
+
+
+    .legal-links {
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+      flex-wrap:wrap;
+
+      gap:7px;
+
+      margin-top:11px;
+
+      color:
+        var(--muted-2);
+
+      font-size:.61rem;
+
+    }
+
+
+    .legal-links a {
+
+      color:
+        var(--muted-2);
+
+      text-decoration:none;
+
+    }
+
+
+    .legal-links a:hover {
+
+      color:
+        var(--accent);
+
+    }
+
 
     /* ======================================================
        MAIN
        ====================================================== */
 
+
     .main {
-      position: relative;
 
-      flex: 1;
-      min-width: 0;
-      height: 100vh;
+      position:relative;
 
-      display: flex;
-      flex-direction: column;
+      flex:1;
 
-      background: var(--bg);
+      min-width:0;
+
+      height:100vh;
+
+      display:flex;
+
+      flex-direction:column;
+
+      background:
+        var(--bg);
+
     }
+
 
     .mobile-menu {
-      display: none;
+
+      display:none;
+
     }
+
 
     /* ======================================================
        CHAT AREA
        ====================================================== */
 
-    .chat-area {
-      flex: 1;
 
-      overflow-y: auto;
+    .chat-area {
+
+      flex:1;
+
+      overflow-y:auto;
 
       padding:
         38px
-        max(35px, calc((100% - 820px) / 2))
-        180px;
+        max(
+          35px,
+          calc(
+            (100% - 820px) / 2
+          )
+        )
+        190px;
+
     }
+
 
     .chat-area::-webkit-scrollbar {
-      width: 7px;
+
+      width:7px;
+
     }
 
+
     .chat-area::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,.08);
-      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,.08);
+
+      border-radius:20px;
+
     }
+
 
     /* ======================================================
        WELCOME
        ====================================================== */
 
+
     .welcome {
-      min-height: 72vh;
 
-      display: flex;
-      flex-direction: column;
+      min-height:72vh;
 
-      align-items: center;
-      justify-content: center;
+      display:flex;
 
-      text-align: center;
+      flex-direction:column;
+
+      align-items:center;
+
+      justify-content:center;
+
+      text-align:center;
+
     }
+
 
     .welcome h1 {
-      font-family: "Instrument Serif", Georgia, serif;
 
-      font-size: clamp(3rem, 6vw, 4.5rem);
-      font-weight: 400;
-      line-height: .98;
+      font-family:
+        "Instrument Serif",
+        Georgia,
+        serif;
 
-      letter-spacing: -.025em;
+      font-size:
+        clamp(
+          3rem,
+          6vw,
+          4.5rem
+        );
+
+      font-weight:400;
+
+      line-height:.98;
+
+      letter-spacing:
+        -.025em;
+
     }
+
 
     .welcome-subtitle {
-      margin-top: 12px;
 
-      color: var(--muted);
+      margin-top:12px;
 
-      font-size: 1rem;
+      color:
+        var(--muted);
+
+      font-size:1rem;
+
     }
+
 
     .accent-line {
-      width: 52px;
-      height: 2px;
 
-      margin: 23px auto 21px;
+      width:52px;
 
-      background: var(--accent);
+      height:2px;
+
+      margin:
+        23px auto 21px;
+
+      background:
+        var(--accent);
+
     }
+
 
     .welcome-description {
-      max-width: 575px;
 
-      color: var(--muted);
+      max-width:575px;
 
-      font-size: .88rem;
-      line-height: 1.65;
+      color:
+        var(--muted);
+
+      font-size:.88rem;
+
+      line-height:1.65;
+
     }
+
 
     /* ======================================================
        MODES
        ====================================================== */
 
+
     .mode-buttons {
-      margin-top: 29px;
 
-      display: flex;
-      gap: 10px;
+      margin-top:29px;
 
-      justify-content: center;
-      flex-wrap: wrap;
+      display:flex;
+
+      gap:10px;
+
+      justify-content:center;
+
+      flex-wrap:wrap;
+
     }
+
 
     .mode-pill {
-      min-width: 112px;
 
-      padding: 10px 17px;
+      min-width:112px;
 
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      padding:
+        10px 17px;
 
-      background: transparent;
-      color: var(--muted);
+      border:
+        1px solid var(--border);
+
+      border-radius:10px;
+
+      background:
+        transparent;
+
+      color:
+        var(--muted);
+
     }
+
 
     .mode-pill:hover {
-      background: var(--surface);
-      color: var(--text);
+
+      background:
+        var(--surface);
+
+      color:
+        var(--text);
+
     }
+
 
     .mode-pill.active {
-      border-color: rgba(217,119,87,.4);
 
-      background: var(--accent-soft);
-      color: #efb8a4;
+      border-color:
+        rgba(217,119,87,.4);
+
+      background:
+        var(--accent-soft);
+
+      color:#efb8a4;
+
     }
+
 
     /* ======================================================
        WELCOME COMPOSER
        ====================================================== */
 
+
     .welcome-composer {
-      width: min(760px, 100%);
 
-      margin-top: 22px;
+      width:
+        min(
+          760px,
+          100%
+        );
 
-      padding: 15px;
+      margin-top:22px;
 
-      border: 1px solid var(--border-strong);
-      border-radius: 16px;
+      padding:15px;
 
-      background: var(--surface);
+      border:
+        1px solid var(--border-strong);
+
+      border-radius:16px;
+
+      background:
+        var(--surface);
+
     }
+
 
     .welcome-composer textarea,
     .floating-box textarea {
-      width: 100%;
 
-      resize: none;
+      width:100%;
 
-      border: 0;
-      outline: none;
+      resize:none;
 
-      background: transparent;
-      color: var(--text);
+      border:0;
 
-      font-size: .9rem;
-      line-height: 1.55;
+      outline:none;
+
+      background:
+        transparent;
+
+      color:
+        var(--text);
+
+      font-size:.9rem;
+
+      line-height:1.55;
+
     }
+
 
     .welcome-composer textarea {
-      min-height: 70px;
-      max-height: 180px;
+
+      min-height:70px;
+
+      max-height:180px;
+
     }
+
 
     textarea::placeholder {
-      color: var(--muted-2);
+
+      color:
+        var(--muted-2);
+
     }
+
 
     .composer-bottom {
-      display: flex;
 
-      align-items: center;
-      justify-content: flex-end;
+      display:flex;
 
-      margin-top: 8px;
+      align-items:center;
+
+      justify-content:
+        flex-end;
+
+      margin-top:8px;
+
     }
+
 
     .send-button {
-      width: 39px;
-      height: 39px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width:39px;
 
-      border: 0;
-      border-radius: 50%;
+      height:39px;
 
-      background: var(--accent);
-      color: white;
+      display:flex;
 
-      font-size: 1rem;
+      align-items:center;
+
+      justify-content:center;
+
+      border:0;
+
+      border-radius:50%;
+
+      background:
+        var(--accent);
+
+      color:white;
+
+      font-size:1rem;
+
     }
+
 
     .send-button:hover {
-      background: var(--accent-hover);
+
+      background:
+        var(--accent-hover);
+
     }
 
+
     .send-button:disabled {
-      opacity: .45;
-      cursor: default;
+
+      opacity:.45;
+
+      cursor:default;
+
     }
+
 
     /* ======================================================
        SUGGESTIONS
        ====================================================== */
 
+
     .suggestion-heading {
-      width: min(690px, 100%);
 
-      margin-top: 27px;
+      width:
+        min(
+          690px,
+          100%
+        );
 
-      color: var(--muted-2);
+      margin-top:27px;
 
-      font-size: .71rem;
-      text-align: left;
+      color:
+        var(--muted-2);
+
+      font-size:.71rem;
+
+      text-align:left;
+
     }
+
 
     .suggestions {
-      width: min(690px, 100%);
 
-      margin-top: 9px;
+      width:
+        min(
+          690px,
+          100%
+        );
 
-      display: grid;
+      margin-top:9px;
+
+      display:grid;
 
       grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(
+          2,
+          minmax(0,1fr)
+        );
 
-      gap: 9px;
+      gap:9px;
+
     }
+
 
     .suggestion {
-      padding: 11px 13px;
 
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      padding:
+        11px 13px;
 
-      background: transparent;
-      color: var(--muted);
+      border:
+        1px solid var(--border);
 
-      text-align: left;
+      border-radius:10px;
 
-      font-size: .73rem;
+      background:
+        transparent;
+
+      color:
+        var(--muted);
+
+      text-align:left;
+
+      font-size:.73rem;
+
     }
+
 
     .suggestion:hover {
-      background: var(--surface);
-      color: var(--text);
+
+      background:
+        var(--surface);
+
+      color:
+        var(--text);
+
     }
 
-    .disclaimer {
-      margin-top: 30px;
 
-      color: var(--muted-2);
+    /* ======================================================
+       ACADEMIC DISCLAIMER
+       ====================================================== */
 
-      font-size: .64rem;
+
+    .academic-disclaimer {
+
+      width:
+        min(
+          690px,
+          100%
+        );
+
+      margin-top:28px;
+
+      padding:
+        13px 15px;
+
+      border:
+        1px solid var(--warning-border);
+
+      border-radius:10px;
+
+      background:
+        var(--warning-bg);
+
+      color:
+        var(--muted);
+
+      font-size:.66rem;
+
+      line-height:1.6;
+
+      text-align:left;
+
     }
+
+
+    .academic-disclaimer strong {
+
+      color:#dcb3a4;
+
+      font-weight:600;
+
+    }
+
+
+    .academic-disclaimer a {
+
+      color:
+        var(--accent);
+
+      text-decoration:none;
+
+    }
+
+
+    .academic-disclaimer a:hover {
+
+      text-decoration:underline;
+
+    }
+
+
+    .journal-warning {
+
+      display:none;
+
+      width:
+        min(
+          690px,
+          100%
+        );
+
+      margin-top:10px;
+
+      color:
+        var(--muted-2);
+
+      font-size:.64rem;
+
+      line-height:1.55;
+
+      text-align:left;
+
+    }
+
+
+    .journal-warning.visible {
+
+      display:block;
+
+    }
+
 
     /* ======================================================
        MESSAGES
        ====================================================== */
 
+
     .message {
-      width: 100%;
 
-      margin-bottom: 28px;
+      width:100%;
 
-      animation: fadeIn .18s ease;
+      margin-bottom:28px;
+
+      animation:
+        fadeIn .18s ease;
+
     }
 
+
     @keyframes fadeIn {
+
       from {
-        opacity: 0;
-        transform: translateY(3px);
+
+        opacity:0;
+
+        transform:
+          translateY(3px);
+
       }
 
       to {
-        opacity: 1;
-        transform: translateY(0);
+
+        opacity:1;
+
+        transform:
+          translateY(0);
+
       }
+
     }
+
 
     .message.user {
-      display: flex;
-      justify-content: flex-end;
+
+      display:flex;
+
+      justify-content:
+        flex-end;
+
     }
+
 
     .message.assistant {
-      display: block;
+
+      display:block;
+
     }
+
 
     .bubble {
-      white-space: pre-wrap;
 
-      line-height: 1.72;
+      white-space:
+        pre-wrap;
 
-      font-size: .91rem;
+      line-height:1.72;
+
+      font-size:.91rem;
+
     }
+
 
     .user .bubble {
-      max-width: 78%;
 
-      padding: 11px 15px;
+      max-width:78%;
 
-      border-radius: 15px 15px 4px 15px;
+      padding:
+        11px 15px;
 
-      background: var(--surface-2);
+      border-radius:
+        15px 15px 4px 15px;
+
+      background:
+        var(--surface-2);
+
     }
+
 
     .assistant .bubble {
-      color: #e9e6df;
+
+      color:#e9e6df;
+
     }
+
 
     .assistant-name {
-      margin-bottom: 7px;
 
-      font-family: "Instrument Serif", Georgia, serif;
+      margin-bottom:7px;
 
-      font-size: 1.03rem;
+      font-family:
+        "Instrument Serif",
+        Georgia,
+        serif;
 
-      color: var(--accent);
+      font-size:1.03rem;
+
+      color:
+        var(--accent);
+
     }
+
 
     /* ======================================================
        THINKING
        ====================================================== */
 
+
     .thinking {
-      display: flex;
-      gap: 8px;
-      align-items: center;
 
-      color: var(--muted);
+      display:flex;
 
-      font-size: .74rem;
+      gap:8px;
+
+      align-items:center;
+
+      color:
+        var(--muted);
+
+      font-size:.74rem;
+
     }
+
 
     .dots {
-      display: flex;
-      gap: 4px;
+
+      display:flex;
+
+      gap:4px;
+
     }
+
 
     .dots span {
-      width: 5px;
-      height: 5px;
 
-      border-radius: 50%;
+      width:5px;
 
-      background: var(--muted);
+      height:5px;
 
-      animation: pulse 1.2s infinite ease-in-out;
+      border-radius:50%;
+
+      background:
+        var(--muted);
+
+      animation:
+        pulse
+        1.2s
+        infinite
+        ease-in-out;
+
     }
+
 
     .dots span:nth-child(2) {
-      animation-delay: .15s;
+
+      animation-delay:.15s;
+
     }
+
 
     .dots span:nth-child(3) {
-      animation-delay: .3s;
+
+      animation-delay:.3s;
+
     }
 
+
     @keyframes pulse {
-      0%, 80%, 100% {
-        opacity: .2;
+
+      0%,
+      80%,
+      100% {
+
+        opacity:.2;
+
       }
 
       40% {
-        opacity: 1;
+
+        opacity:1;
+
       }
+
     }
+
 
     /* ======================================================
        FLOATING COMPOSER
        ====================================================== */
 
+
     .floating-composer {
-      display: none;
 
-      position: absolute;
+      display:none;
 
-      left: 0;
-      right: 0;
-      bottom: 0;
+      position:absolute;
+
+      left:0;
+
+      right:0;
+
+      bottom:0;
 
       padding:
         24px
-        max(35px, calc((100% - 820px) / 2))
+        max(
+          35px,
+          calc(
+            (100% - 820px) / 2
+          )
+        )
         21px;
 
       background:
@@ -874,615 +1620,1044 @@
           var(--bg) 72%,
           rgba(24,24,23,0)
         );
+
     }
+
 
     .floating-composer.visible {
-      display: block;
+
+      display:block;
+
     }
+
 
     .floating-box {
-      padding: 14px;
 
-      border: 1px solid var(--border-strong);
-      border-radius: 15px;
+      padding:14px;
 
-      background: var(--surface);
+      border:
+        1px solid var(--border-strong);
+
+      border-radius:15px;
+
+      background:
+        var(--surface);
+
     }
+
 
     .floating-box textarea {
-      min-height: 50px;
-      max-height: 150px;
+
+      min-height:50px;
+
+      max-height:150px;
+
     }
+
+
+    .composer-note {
+
+      margin-top:7px;
+
+      color:
+        var(--muted-2);
+
+      font-size:.59rem;
+
+      line-height:1.4;
+
+    }
+
+
+    .composer-note a {
+
+      color:
+        var(--muted-2);
+
+      text-decoration:none;
+
+    }
+
+
+    .composer-note a:hover {
+
+      color:
+        var(--accent);
+
+    }
+
 
     /* ======================================================
        MOBILE
        ====================================================== */
 
-    @media (max-width: 760px) {
+
+    @media(
+      max-width:760px
+    ) {
+
 
       .sidebar {
-        position: fixed;
 
-        left: -340px;
-        top: 0;
+        position:fixed;
 
-        z-index: 100;
+        left:-340px;
 
-        transition: left .2s ease;
+        top:0;
+
+        z-index:100;
+
+        transition:
+          left .2s ease;
+
       }
+
 
       .sidebar.open {
-        left: 0;
+
+        left:0;
+
       }
+
 
       .mobile-menu {
-        display: block;
 
-        position: fixed;
+        display:block;
 
-        left: 14px;
-        top: 14px;
+        position:fixed;
 
-        z-index: 90;
+        left:14px;
 
-        width: 38px;
-        height: 38px;
+        top:14px;
 
-        border: 1px solid var(--border);
-        border-radius: 9px;
+        z-index:90;
 
-        background: var(--surface);
-        color: var(--text);
+        width:38px;
+
+        height:38px;
+
+        border:
+          1px solid var(--border);
+
+        border-radius:9px;
+
+        background:
+          var(--surface);
+
+        color:
+          var(--text);
+
       }
+
 
       .chat-area {
+
         padding:
-          85px 18px
-          180px;
+          85px 18px 195px;
+
       }
+
 
       .suggestions {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
+
       .floating-composer {
-        padding: 20px 14px 14px;
+
+        padding:
+          20px 14px 14px;
+
       }
 
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <div class="app">
+
 
   <!-- =====================================================
        SIDEBAR
        ===================================================== -->
 
+
   <aside
     class="sidebar"
-    id="sidebar">
+    id="sidebar"
+  >
+
 
     <div class="brand">
 
       <div class="brand-title">
+
         BioInfo Chat
+
       </div>
 
+
       <div class="brand-subtitle">
+
         Bioinformatics, Omics & Evolution
+
       </div>
 
     </div>
 
 
+
     <div class="nav-group">
+
 
       <button
         id="chatBtn"
         class="nav-item active"
-        onclick="setTool('chat')">
+        onclick="setTool('chat')"
+      >
 
-        <span class="nav-icon">◯</span>
+        <span class="nav-icon">
+          ◯
+        </span>
+
         Chat
 
       </button>
 
 
+
       <button
         id="journalBtn"
         class="nav-item"
-        onclick="setTool('journals')">
+        onclick="setTool('journals')"
+      >
 
-        <span class="nav-icon">▤</span>
+        <span class="nav-icon">
+          ▤
+        </span>
+
         Periódicos
 
       </button>
 
 
+
       <button
         id="freeBtn"
         class="nav-item active"
-        onclick="setMode('free')">
+        onclick="setMode('free')"
+      >
 
-        <span class="nav-icon">✦</span>
+        <span class="nav-icon">
+          ✦
+        </span>
+
         Livre
 
       </button>
 
 
+
       <button
         id="discBtn"
         class="nav-item"
-        onclick="setMode('discipline')">
+        onclick="setMode('discipline')"
+      >
 
-        <span class="nav-icon">◇</span>
+        <span class="nav-icon">
+          ◇
+        </span>
+
         Disciplina
 
       </button>
 
+
     </div>
 
 
-    <div class="nav-separator"></div>
+
+    <div class="nav-separator">
+    </div>
 
 
-    <label class="language-label">
+
+    <label
+      class="language-label"
+      for="language"
+    >
+
       Idioma
+
     </label>
+
 
 
     <select
       id="language"
-      class="language-select">
+      class="language-select"
+    >
 
-      <option value="pt">
+      <option
+        value="pt"
+      >
+
         Português
+
       </option>
 
-      <option value="en">
+
+      <option
+        value="en"
+      >
+
         English
+
       </option>
 
     </select>
 
 
+
     <button
       class="new-chat"
-      onclick="newChat()">
+      onclick="newChat()"
+    >
 
       ＋ Nova conversa
 
     </button>
 
 
-    <!-- REAL HISTORY -->
+
+    <!-- ===================================================
+         HISTORY
+         =================================================== -->
+
 
     <div class="recent">
 
+
       <div class="recent-header">
 
+
         <div class="recent-title">
+
           Conversas recentes
+
         </div>
+
 
         <button
           class="clear-history"
-          onclick="clearHistory()">
+          onclick="clearHistory()"
+        >
 
           Limpar
 
         </button>
 
+
       </div>
+
+
 
       <div
         class="recent-list"
-        id="recentList">
+        id="recentList"
+      >
       </div>
+
 
     </div>
 
 
+
     <!-- ===================================================
-         BOTTOM
+         SIDEBAR BOTTOM
          =================================================== -->
+
 
     <div class="sidebar-bottom">
 
 
+
       <!-- ABOUT -->
+
 
       <div class="about-sidebar">
 
+
         <h3>
+
           Sobre o BioInfo Chat
+
         </h3>
 
+
         <p>
+
           Ferramenta acadêmica experimental
           para apoio ao ensino e estudo em
           Bioinformática, Ômicas e Evolução.
+
           As respostas devem ser avaliadas
           criticamente e confrontadas com
-          a literatura científica.
+          literatura científica e
+          documentação especializada.
+
         </p>
 
+
         <a
-          href="https://tiagobelintani.github.io/"
+          href="https://tiagobelintani.github.io/bioinfo-chat.html"
           target="_blank"
-          rel="noopener">
+          rel="noopener"
+        >
 
           Saiba mais →
 
         </a>
 
+
       </div>
+
 
 
       <!-- CREATOR -->
 
+
       <div class="creator-card">
+
 
         <div class="creator-main">
 
+
           <div class="creator-label">
+
             Criado por
+
           </div>
 
+
           <div class="creator-name">
+
             Tiago Belintani
+
           </div>
+
 
         </div>
 
+
+
         <div class="creator-links">
+
 
           <a
             href="https://tiagobelintani.github.io/"
             target="_blank"
-            rel="noopener">
+            rel="noopener"
+          >
 
             Website
 
           </a>
 
+
           <a
-            href="https://github.com/TiagoBelintani"
+            href="https://github.com/TiagoBelintani/bioinfo-chat"
             target="_blank"
-            rel="noopener">
+            rel="noopener"
+          >
 
             GitHub
 
           </a>
 
+
         </div>
+
 
       </div>
 
+
+
+      <!-- LEGAL -->
+
+
+      <div class="legal-links">
+
+
+        <a
+          href="privacy.html"
+        >
+
+          Privacy
+
+        </a>
+
+
+        <span>
+
+          ·
+
+        </span>
+
+
+        <a
+          href="terms.html"
+        >
+
+          Terms &amp; Disclaimer
+
+        </a>
+
+
+      </div>
+
+
     </div>
 
+
   </aside>
+
 
 
   <!-- =====================================================
        MAIN
        ===================================================== -->
 
+
   <main class="main">
 
 
     <button
       class="mobile-menu"
-      onclick="toggleSidebar()">
+      onclick="toggleSidebar()"
+      aria-label="Abrir menu"
+    >
 
       ☰
 
     </button>
 
 
+
     <div
       class="chat-area"
-      id="chat">
+      id="chat"
+    >
 
-      <!-- filled by JS -->
+      <!-- Filled by JavaScript -->
 
     </div>
 
 
+
+    <!-- ===================================================
+         FLOATING COMPOSER
+         =================================================== -->
+
+
     <div
       class="floating-composer"
-      id="floatingComposer">
+      id="floatingComposer"
+    >
+
 
       <div class="floating-box">
+
 
         <textarea
           id="input"
           placeholder="Digite sua pergunta..."
-          rows="2">
-        </textarea>
+          rows="2"
+        ></textarea>
+
+
 
         <div class="composer-bottom">
+
 
           <button
             id="sendButton"
             class="send-button"
-            onclick="send()">
+            onclick="send()"
+            aria-label="Enviar pergunta"
+          >
 
             ↑
 
           </button>
 
+
         </div>
+
+
+
+        <div class="composer-note">
+
+          Não envie informações confidenciais,
+          não publicadas, sensíveis ou pessoais.
+
+          <a href="privacy.html">
+
+            Privacy
+
+          </a>
+
+          ·
+
+          <a href="terms.html">
+
+            Terms
+
+          </a>
+
+        </div>
+
 
       </div>
 
+
     </div>
 
+
   </main>
+
 
 </div>
 
 
+
 <script>
+
 
 /* =========================================================
    STATE
    ========================================================= */
 
-let mode = "free";
-let tool = "chat";
-let language = "pt";
 
-let isSending = false;
-let activeConversationId = null;
+let mode =
+  "free";
+
+
+let tool =
+  "chat";
+
+
+let language =
+  "pt";
+
+
+let isSending =
+  false;
+
+
+let activeConversationId =
+  null;
+
 
 const STORAGE_KEY =
   "bioinfo_chat_conversations_v1";
+
 
 
 /* =========================================================
    PROMPTS
    ========================================================= */
 
+
 const PROMPTS = {
+
 
   pt: {
 
+
     chat: {
 
+
       free:
-        "Você é um assistente acadêmico especializado em Bioinformática, Ômicas e Evolução. Responda de forma clara, objetiva e cientificamente responsável.",
+        "Você é um assistente acadêmico especializado em Bioinformática, Ômicas e Evolução. Responda de forma clara, objetiva e cientificamente responsável. Não invente referências. Quando houver incerteza, deixe isso explícito. Incentive a verificação das informações em literatura científica primária e documentação oficial.",
+
 
       discipline:
-        "Você é um instrutor acadêmico especializado em Bioinformática, Ômicas e Evolução. Responda em português brasileiro, estruturando a resposta em definição, contexto, exemplo e limitações."
+        "Você é um instrutor acadêmico especializado em Bioinformática, Ômicas e Evolução. Responda em português brasileiro, estruturando a resposta em definição, contexto, exemplo e limitações. Não invente referências. Quando houver incerteza, deixe isso explícito e incentive a consulta à literatura científica primária e documentação oficial."
+
 
     },
 
+
     journals:
-      "Você é um consultor editorial acadêmico. A partir do resumo fornecido, sugira periódicos científicos nacionais e internacionais adequados ao escopo do estudo. Para cada periódico, forneça uma breve justificativa baseada no escopo editorial. Não garanta aceitação e recomende que o usuário confirme o escopo diretamente no site oficial do periódico."
+      "Você é um consultor editorial acadêmico. A partir do resumo fornecido, sugira periódicos científicos potencialmente adequados ao escopo do estudo. Para cada periódico, forneça uma breve justificativa baseada no possível alinhamento temático. As sugestões são apenas exploratórias: não implicam endosso, adequação definitiva ou probabilidade de aceitação. Não invente dados editoriais, métricas, taxas ou indexações. Oriente o usuário a verificar aims and scope, taxas, políticas editoriais e requisitos diretamente no site oficial de cada periódico."
+
 
   },
 
+
+
   en: {
+
 
     chat: {
 
+
       free:
-        "You are an academic assistant specialized in Bioinformatics, Omics, and Evolution. Respond clearly, objectively, and with scientific responsibility.",
+        "You are an academic assistant specialized in Bioinformatics, Omics, and Evolution. Respond clearly, objectively, and with scientific responsibility. Do not fabricate references. Explicitly state uncertainty when appropriate and encourage verification against primary scientific literature and official documentation.",
+
 
       discipline:
-        "You are an academic instructor specialized in Bioinformatics, Omics, and Evolution. Respond in formal academic English and structure the response into definition, context, example, and limitations."
+        "You are an academic instructor specialized in Bioinformatics, Omics, and Evolution. Respond in formal academic English and structure the response into definition, context, example, and limitations. Do not fabricate references. Explicitly state uncertainty when appropriate and encourage verification against primary scientific literature and official documentation."
+
 
     },
 
+
     journals:
-      "You are an academic editorial advisor. Based on the provided abstract, suggest suitable national and international scientific journals. For each journal, provide a brief justification based on editorial scope. Do not imply acceptance and recommend checking the journal's official scope."
+      "You are an academic editorial advisor. Based on the provided abstract, suggest scientific journals that may be compatible with the study. For each journal, provide a brief justification based on likely thematic alignment. Suggestions are exploratory only and do not imply endorsement, definitive suitability, or likelihood of acceptance. Do not fabricate editorial information, metrics, fees, or indexing status. Instruct the user to verify aims and scope, fees, editorial policies, and submission requirements directly on each journal's official website."
+
 
   }
 
+
 };
+
 
 
 /* =========================================================
    STORAGE
    ========================================================= */
 
+
 function getConversations() {
+
 
   try {
 
+
     return JSON.parse(
-      localStorage.getItem(STORAGE_KEY)
+
+      localStorage.getItem(
+        STORAGE_KEY
+      )
+
     ) || [];
+
 
   } catch {
 
+
     return [];
+
 
   }
 
+
 }
 
 
-function saveConversations(conversations) {
+
+function saveConversations(
+  conversations
+) {
+
 
   localStorage.setItem(
+
     STORAGE_KEY,
-    JSON.stringify(conversations)
+
+    JSON.stringify(
+      conversations
+    )
+
   );
+
 
 }
 
 
-function createConversation(firstMessage) {
+
+function createConversation(
+  firstMessage
+) {
+
 
   const conversations =
     getConversations();
 
+
   const conversation = {
 
+
     id:
-      Date.now().toString(),
+      Date.now()
+        .toString(),
+
 
     title:
-      makeTitle(firstMessage),
+      makeTitle(
+        firstMessage
+      ),
+
 
     createdAt:
       Date.now(),
 
+
     updatedAt:
       Date.now(),
 
+
     tool,
+
+
     mode,
+
+
     language,
+
 
     messages: []
 
+
   };
+
 
   conversations.unshift(
     conversation
   );
 
+
   saveConversations(
     conversations
   );
 
+
   activeConversationId =
     conversation.id;
 
+
   renderRecent();
+
 
   return conversation;
 
+
 }
 
 
-function makeTitle(text) {
+
+function makeTitle(
+  text
+) {
+
 
   const clean =
     text
-      .replace(/\s+/g, " ")
+      .replace(
+        /\s+/g,
+        " "
+      )
       .trim();
 
-  if (clean.length <= 40) {
+
+  if (
+    clean.length <= 40
+  ) {
+
+
     return clean;
+
+
   }
 
-  return clean.slice(0, 40) + "…";
+
+  return (
+    clean.slice(
+      0,
+      40
+    )
+    +
+    "…"
+  );
+
 
 }
+
 
 
 function getActiveConversation() {
 
-  if (!activeConversationId) {
+
+  if (
+    !activeConversationId
+  ) {
+
+
     return null;
+
+
   }
 
-  return getConversations()
-    .find(
-      item =>
-        item.id ===
-        activeConversationId
-    ) || null;
+
+  return (
+    getConversations()
+      .find(
+
+        item =>
+          item.id ===
+          activeConversationId
+
+      )
+      ||
+      null
+  );
+
 
 }
+
 
 
 function updateConversation(
   conversation
 ) {
 
+
   const conversations =
     getConversations();
 
+
   const index =
     conversations.findIndex(
+
       item =>
-        item.id === conversation.id
+        item.id ===
+        conversation.id
+
     );
 
-  if (index === -1) {
+
+  if (
+    index === -1
+  ) {
+
+
     return;
+
+
   }
+
 
   conversation.updatedAt =
     Date.now();
 
+
   conversations[index] =
     conversation;
 
+
   conversations.sort(
-    (a, b) =>
+
+    (a,b) =>
       b.updatedAt -
       a.updatedAt
+
   );
+
 
   saveConversations(
     conversations
   );
 
+
   renderRecent();
 
+
 }
+
 
 
 /* =========================================================
    HISTORY SIDEBAR
    ========================================================= */
 
+
 function renderRecent() {
+
 
   const container =
     document.getElementById(
       "recentList"
     );
 
+
   const conversations =
     getConversations();
 
-  container.innerHTML = "";
+
+  container.innerHTML =
+    "";
 
 
-  if (!conversations.length) {
+  if (
+    !conversations.length
+  ) {
+
 
     const empty =
       document.createElement(
         "div"
       );
 
+
     empty.className =
       "recent-empty";
 
+
     empty.textContent =
       "Nenhuma conversa salva ainda.";
+
 
     container.appendChild(
       empty
     );
 
+
     return;
+
 
   }
 
 
   conversations
-    .slice(0, 8)
+    .slice(
+      0,
+      8
+    )
     .forEach(
+
       conversation => {
+
 
         const row =
           document.createElement(
             "div"
           );
 
+
         row.className =
           "recent-row";
+
 
 
         const button =
@@ -1490,22 +2665,28 @@ function renderRecent() {
             "button"
           );
 
+
         button.className =
           "recent-item";
+
 
         if (
           conversation.id ===
           activeConversationId
         ) {
 
+
           button.classList.add(
             "active"
           );
 
+
         }
+
 
         button.textContent =
           conversation.title;
+
 
         button.onclick =
           () =>
@@ -1514,53 +2695,81 @@ function renderRecent() {
             );
 
 
+
         const remove =
           document.createElement(
             "button"
           );
 
+
         remove.className =
           "delete-chat";
+
 
         remove.title =
           "Excluir conversa";
 
+
         remove.textContent =
           "×";
+
 
         remove.onclick =
           event => {
 
+
             event.stopPropagation();
+
 
             deleteConversation(
               conversation.id
             );
 
+
           };
 
 
-        row.appendChild(button);
-        row.appendChild(remove);
+        row.appendChild(
+          button
+        );
 
-        container.appendChild(row);
+
+        row.appendChild(
+          remove
+        );
+
+
+        container.appendChild(
+          row
+        );
+
 
       }
+
     );
+
 
 }
 
 
-function deleteConversation(id) {
+
+function deleteConversation(
+  id
+) {
+
 
   let conversations =
     getConversations();
 
+
   conversations =
     conversations.filter(
+
       item =>
         item.id !== id
+
     );
+
 
   saveConversations(
     conversations
@@ -1571,85 +2780,138 @@ function deleteConversation(id) {
     activeConversationId === id
   ) {
 
+
     activeConversationId =
       null;
 
+
     showWelcome();
+
 
   }
 
 
   renderRecent();
 
+
 }
+
 
 
 function clearHistory() {
 
+
   const conversations =
     getConversations();
 
-  if (!conversations.length) {
+
+  if (
+    !conversations.length
+  ) {
+
+
     return;
+
+
   }
+
 
   const confirmed =
     confirm(
       "Excluir todas as conversas salvas?"
     );
 
-  if (!confirmed) {
+
+  if (
+    !confirmed
+  ) {
+
+
     return;
+
+
   }
+
 
   localStorage.removeItem(
     STORAGE_KEY
   );
 
+
   activeConversationId =
     null;
 
+
   renderRecent();
+
+
   showWelcome();
 
+
 }
+
 
 
 /* =========================================================
    LOAD CONVERSATION
    ========================================================= */
 
-function loadConversation(id) {
+
+function loadConversation(
+  id
+) {
+
 
   const conversation =
     getConversations()
       .find(
-        item => item.id === id
+
+        item =>
+          item.id === id
+
       );
 
-  if (!conversation) {
+
+  if (
+    !conversation
+  ) {
+
+
     return;
+
+
   }
+
 
   activeConversationId =
     conversation.id;
 
+
   tool =
-    conversation.tool ||
+    conversation.tool
+    ||
     "chat";
 
+
   mode =
-    conversation.mode ||
+    conversation.mode
+    ||
     "free";
 
+
   language =
-    conversation.language ||
+    conversation.language
+    ||
     "pt";
 
 
-  document.getElementById(
-    "language"
-  ).value = language;
+  document
+    .getElementById(
+      "language"
+    )
+    .value =
+      language;
+
 
   syncButtons();
 
@@ -1659,20 +2921,30 @@ function loadConversation(id) {
       "chat"
     );
 
-  chat.innerHTML = "";
+
+  chat.innerHTML =
+    "";
 
 
   conversation.messages
     .forEach(
+
       message => {
 
+
         addMessage(
+
           message.content,
+
           message.role,
+
           false
+
         );
 
+
       }
+
     );
 
 
@@ -1686,46 +2958,65 @@ function loadConversation(id) {
 
 
   renderRecent();
+
+
   updatePlaceholders();
+
+
   scrollBottom();
 
+
 }
+
 
 
 /* =========================================================
    WELCOME
    ========================================================= */
 
+
 function showWelcome() {
+
 
   const chat =
     document.getElementById(
       "chat"
     );
 
+
   chat.innerHTML = `
 
     <div
       class="welcome"
-      id="welcome">
+      id="welcome"
+    >
+
 
       <h1>
+
         BioInfo Chat
+
       </h1>
 
+
       <div
-        class="welcome-subtitle">
+        class="welcome-subtitle"
+      >
 
         Bioinformatics, Omics & Evolution
 
       </div>
 
-      <div
-        class="accent-line">
-      </div>
 
       <div
-        class="welcome-description">
+        class="accent-line"
+      >
+      </div>
+
+
+      <div
+        class="welcome-description"
+      >
 
         Faça perguntas, explore conceitos,
         métodos e análises em bioinformática,
@@ -1734,138 +3025,214 @@ function showWelcome() {
       </div>
 
 
+
       <div
-        class="mode-buttons">
+        class="mode-buttons"
+      >
+
 
         <button
           id="homeChatBtn"
           class="mode-pill"
-          onclick="setTool('chat')">
+          onclick="setTool('chat')"
+        >
 
           Chat
 
         </button>
 
+
         <button
           id="homeJournalBtn"
           class="mode-pill"
-          onclick="setTool('journals')">
+          onclick="setTool('journals')"
+        >
 
           Periódicos
 
         </button>
 
+
         <button
           id="homeFreeBtn"
           class="mode-pill"
-          onclick="setMode('free')">
+          onclick="setMode('free')"
+        >
 
           Livre
 
         </button>
 
+
         <button
           id="homeDiscBtn"
           class="mode-pill"
-          onclick="setMode('discipline')">
+          onclick="setMode('discipline')"
+        >
 
           Disciplina
 
         </button>
 
+
       </div>
 
 
+
       <div
-        class="welcome-composer">
+        class="welcome-composer"
+      >
+
 
         <textarea
           id="homeInput"
           placeholder="Digite sua pergunta..."
-          rows="2"></textarea>
+          rows="2"
+        ></textarea>
+
 
         <div
-          class="composer-bottom">
+          class="composer-bottom"
+        >
+
 
           <button
             id="homeSend"
             class="send-button"
-            onclick="sendFromHome()">
+            onclick="sendFromHome()"
+            aria-label="Enviar pergunta"
+          >
 
             ↑
 
           </button>
 
+
         </div>
+
 
       </div>
 
 
+
       <div
-        class="suggestion-heading">
+        class="suggestion-heading"
+      >
 
         Sugestões para começar
 
       </div>
 
 
+
       <div
-        class="suggestions">
+        class="suggestions"
+      >
+
 
         <button
           class="suggestion"
           onclick="quickPrompt(
             'Explique alinhamento de sequências.'
-          )">
+          )"
+        >
 
           Explicar alinhamento de sequências
 
         </button>
 
 
+
         <button
           class="suggestion"
           onclick="quickPrompt(
-            'Quais são as melhores ferramentas para filogenômica?'
-          )">
+            'Quais são as principais ferramentas para filogenômica e quando devo usar cada uma?'
+          )"
+        >
 
-          Melhores ferramentas para filogenômica
+          Ferramentas para filogenômica
 
         </button>
+
 
 
         <button
           class="suggestion"
           onclick="quickPrompt(
             'Explique um pipeline de RNA-Seq passo a passo.'
-          )">
+          )"
+        >
 
           Pipeline de RNA-Seq passo a passo
 
         </button>
 
 
+
         <button
           class="suggestion"
           onclick="quickPrompt(
-            'Sugira periódicos para um estudo genômico.'
-          )">
+            'Sugira periódicos potencialmente compatíveis com um estudo genômico.'
+          )"
+        >
 
           Periódicos para estudos genômicos
 
         </button>
 
+
       </div>
+
 
 
       <div
-        class="disclaimer">
+        class="academic-disclaimer"
+      >
 
-        Uso acadêmico.
-        As respostas não substituem
-        leitura crítica da literatura científica.
+        <strong>
+          Ferramenta acadêmica experimental.
+        </strong>
+
+        As respostas geradas por inteligência artificial
+        podem conter erros, omissões ou informações
+        desatualizadas.
+
+        Verifique informações científicas em literatura
+        primária e documentação oficial.
+
+        Não envie informações confidenciais,
+        não publicadas, sensíveis ou pessoalmente
+        identificáveis.
+
+        <a href="terms.html">
+          Terms
+        </a>
+
+        ·
+
+        <a href="privacy.html">
+          Privacy
+        </a>
 
       </div>
+
+
+
+      <div
+        class="journal-warning"
+        id="journalWarning"
+      >
+
+        As sugestões de periódicos são exploratórias
+        e não implicam endosso, adequação definitiva
+        ou probabilidade de aceitação.
+
+        Sempre confirme escopo, taxas,
+        políticas editoriais e requisitos de submissão
+        no site oficial do periódico.
+
+      </div>
+
 
     </div>
 
@@ -1886,116 +3253,163 @@ function showWelcome() {
       "homeInput"
     );
 
+
   homeInput.addEventListener(
+
     "keydown",
+
     event => {
 
+
       if (
-        event.key === "Enter" &&
+        event.key === "Enter"
+        &&
         !event.shiftKey
       ) {
 
+
         event.preventDefault();
+
 
         sendFromHome();
 
+
       }
 
+
     }
+
   );
 
 
   syncButtons();
+
+
   updatePlaceholders();
 
+
+  updateJournalWarning();
+
+
 }
+
 
 
 /* =========================================================
    MODE / TOOL
    ========================================================= */
 
+
 function setTool(
   selectedTool
 ) {
 
+
   tool =
     selectedTool;
 
+
   syncButtons();
+
+
   updatePlaceholders();
 
+
+  updateJournalWarning();
+
+
 }
+
 
 
 function setMode(
   selectedMode
 ) {
 
+
   mode =
     selectedMode;
 
+
   syncButtons();
+
 
 }
 
 
+
 function syncButtons() {
 
+
   const pairs = [
+
 
     [
       "chatBtn",
       tool === "chat"
     ],
 
+
     [
       "journalBtn",
       tool === "journals"
     ],
+
 
     [
       "freeBtn",
       mode === "free"
     ],
 
+
     [
       "discBtn",
       mode === "discipline"
     ],
+
 
     [
       "homeChatBtn",
       tool === "chat"
     ],
 
+
     [
       "homeJournalBtn",
       tool === "journals"
     ],
+
 
     [
       "homeFreeBtn",
       mode === "free"
     ],
 
+
     [
       "homeDiscBtn",
       mode === "discipline"
     ]
 
+
   ];
 
 
   pairs.forEach(
-    ([id, active]) => {
+
+    ([id,active]) => {
+
 
       const element =
         document.getElementById(
           id
         );
 
-      if (element) {
+
+      if (
+        element
+      ) {
+
 
         element
           .classList
@@ -2004,55 +3418,119 @@ function syncButtons() {
             active
           );
 
+
       }
 
+
     }
+
   );
 
+
 }
+
+
+
+function updateJournalWarning() {
+
+
+  const warning =
+    document.getElementById(
+      "journalWarning"
+    );
+
+
+  if (
+    !warning
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  warning.classList.toggle(
+
+    "visible",
+
+    tool === "journals"
+
+  );
+
+
+}
+
 
 
 /* =========================================================
    LANGUAGE
    ========================================================= */
 
+
 document
   .getElementById(
     "language"
   )
   .addEventListener(
+
     "change",
+
     event => {
+
 
       language =
         event.target.value;
 
+
       updatePlaceholders();
 
+
     }
+
   );
+
 
 
 function updatePlaceholders() {
 
+
   const placeholder =
+
     tool === "journals"
+
       ?
-        (
-          language === "pt"
-            ?
-              "Cole aqui o resumo do artigo..."
-            :
-              "Paste your manuscript abstract here..."
-        )
+
+      (
+
+        language === "pt"
+
+          ?
+
+          "Cole aqui o resumo do artigo..."
+
+          :
+
+          "Paste your manuscript abstract here..."
+
+      )
+
       :
-        (
-          language === "pt"
-            ?
-              "Digite sua pergunta..."
-            :
-              "Ask your question..."
-        );
+
+      (
+
+        language === "pt"
+
+          ?
+
+          "Digite sua pergunta..."
+
+          :
+
+          "Ask your question..."
+
+      );
 
 
   const input =
@@ -2060,9 +3538,16 @@ function updatePlaceholders() {
       "input"
     );
 
-  if (input) {
+
+  if (
+    input
+  ) {
+
+
     input.placeholder =
       placeholder;
+
+
   }
 
 
@@ -2071,28 +3556,47 @@ function updatePlaceholders() {
       "homeInput"
     );
 
-  if (homeInput) {
+
+  if (
+    homeInput
+  ) {
+
+
     homeInput.placeholder =
       placeholder;
+
+
   }
 
+
 }
+
 
 
 /* =========================================================
    CHAT RENDERING
    ========================================================= */
 
+
 function prepareChat() {
+
 
   const welcome =
     document.getElementById(
       "welcome"
     );
 
-  if (welcome) {
+
+  if (
+    welcome
+  ) {
+
+
     welcome.remove();
+
+
   }
+
 
   document
     .getElementById(
@@ -2102,7 +3606,9 @@ function prepareChat() {
       "visible"
     );
 
+
 }
+
 
 
 function addMessage(
@@ -2110,6 +3616,7 @@ function addMessage(
   role,
   scroll = true
 ) {
+
 
   prepareChat();
 
@@ -2119,6 +3626,7 @@ function addMessage(
       "div"
     );
 
+
   message.className =
     `message ${role}`;
 
@@ -2127,20 +3635,25 @@ function addMessage(
     role === "assistant"
   ) {
 
+
     const name =
       document.createElement(
         "div"
       );
 
+
     name.className =
       "assistant-name";
+
 
     name.textContent =
       "BioInfo Chat";
 
+
     message.appendChild(
       name
     );
+
 
   }
 
@@ -2150,11 +3663,14 @@ function addMessage(
       "div"
     );
 
+
   bubble.className =
     "bubble";
 
+
   bubble.textContent =
     text;
+
 
   message.appendChild(
     bubble
@@ -2170,50 +3686,71 @@ function addMessage(
     );
 
 
-  if (scroll) {
+  if (
+    scroll
+  ) {
+
+
     scrollBottom();
+
+
   }
 
+
 }
+
 
 
 /* =========================================================
    THINKING
    ========================================================= */
 
+
 function addThinking() {
 
+
   prepareChat();
+
 
   const thinking =
     document.createElement(
       "div"
     );
 
+
   thinking.className =
     "message assistant";
+
 
   thinking.id =
     "thinkingMessage";
 
+
   thinking.innerHTML = `
 
     <div
-      class="assistant-name">
+      class="assistant-name"
+    >
 
       BioInfo Chat
 
     </div>
 
+
     <div
-      class="thinking">
+      class="thinking"
+    >
 
       Respondendo
 
-      <div class="dots">
+      <div
+        class="dots"
+      >
 
         <span></span>
+
         <span></span>
+
         <span></span>
 
       </div>
@@ -2234,10 +3771,13 @@ function addThinking() {
 
   scrollBottom();
 
+
 }
 
 
+
 function removeThinking() {
+
 
   document
     .getElementById(
@@ -2245,30 +3785,46 @@ function removeThinking() {
     )
     ?.remove();
 
+
 }
 
 
+
 function scrollBottom() {
+
 
   const chat =
     document.getElementById(
       "chat"
     );
 
+
   chat.scrollTop =
     chat.scrollHeight;
 
+
 }
+
 
 
 /* =========================================================
    SEND
    ========================================================= */
 
-async function sendText(text) {
 
-  if (isSending) {
+async function sendText(
+  text
+) {
+
+
+  if (
+    isSending
+  ) {
+
+
     return;
+
+
   }
 
 
@@ -2276,8 +3832,14 @@ async function sendText(text) {
     text.trim();
 
 
-  if (!text) {
+  if (
+    !text
+  ) {
+
+
     return;
+
+
   }
 
 
@@ -2285,12 +3847,16 @@ async function sendText(text) {
     getActiveConversation();
 
 
-  if (!conversation) {
+  if (
+    !conversation
+  ) {
+
 
     conversation =
       createConversation(
         text
       );
+
 
   }
 
@@ -2298,8 +3864,10 @@ async function sendText(text) {
   conversation.tool =
     tool;
 
+
   conversation.mode =
     mode;
+
 
   conversation.language =
     language;
@@ -2328,27 +3896,34 @@ async function sendText(text) {
 
 
   const systemPrompt =
+
     tool === "chat"
+
       ?
-        PROMPTS[
-          language
-        ].chat[
-          mode
-        ]
+
+      PROMPTS[
+        language
+      ].chat[
+        mode
+      ]
+
       :
-        PROMPTS[
-          language
-        ].journals;
+
+      PROMPTS[
+        language
+      ].journals;
 
 
-  isSending = true;
+  isSending =
+    true;
 
 
   document
     .getElementById(
       "sendButton"
     )
-    .disabled = true;
+    .disabled =
+      true;
 
 
   addThinking();
@@ -2356,54 +3931,69 @@ async function sendText(text) {
 
   try {
 
-    /*
-      The complete conversation is sent
-      so the assistant retains context.
-    */
 
     const recentMessages =
       conversation
         .messages
-        .slice(-12);
+        .slice(
+          -12
+        );
 
 
     const response =
       await fetch(
+
         "/api/chat",
+
         {
+
 
           method:
             "POST",
 
+
           headers: {
+
 
             "Content-Type":
               "application/json"
 
+
           },
+
 
           body:
             JSON.stringify({
 
-              messages: [
+
+              messages:[
+
 
                 {
+
 
                   role:
                     "system",
 
+
                   content:
                     systemPrompt
 
+
                 },
+
 
                 ...recentMessages
 
+
               ]
+
 
             })
 
+
         }
+
       );
 
 
@@ -2414,37 +4004,56 @@ async function sendText(text) {
     removeThinking();
 
 
-    if (!response.ok) {
+    if (
+      !response.ok
+    ) {
+
 
       const errorMessage =
-        data?.error?.message ||
+
+        data?.error?.message
+
+        ||
+
         "Não foi possível gerar a resposta.";
 
 
       addMessage(
+
         `Erro: ${errorMessage}`,
+
         "assistant"
+
       );
 
 
       return;
+
 
     }
 
 
     const reply =
       data?.choices?.[0]
-        ?.message?.content;
+        ?.message
+        ?.content;
 
 
     const answer =
-      reply ||
+
+      reply
+
+      ||
+
       "Não foi possível gerar uma resposta.";
 
 
     addMessage(
+
       answer,
+
       "assistant"
+
     );
 
 
@@ -2452,34 +4061,52 @@ async function sendText(text) {
       getActiveConversation();
 
 
-    conversation.messages.push({
-
-      role:
-        "assistant",
-
-      content:
-        answer
-
-    });
-
-
-    updateConversation(
+    if (
       conversation
-    );
+    ) {
 
 
-  } catch (error) {
+      conversation.messages.push({
+
+
+        role:
+          "assistant",
+
+
+        content:
+          answer
+
+
+      });
+
+
+      updateConversation(
+        conversation
+      );
+
+
+    }
+
+
+  } catch (
+    error
+  ) {
+
 
     removeThinking();
 
 
     addMessage(
+
       "Não foi possível conectar ao serviço. Tente novamente.",
+
       "assistant"
+
     );
 
 
   } finally {
+
 
     isSending =
       false;
@@ -2499,16 +4126,21 @@ async function sendText(text) {
       )
       .focus();
 
+
   }
 
+
 }
+
 
 
 /* =========================================================
    INPUT ACTIONS
    ========================================================= */
 
+
 function sendFromHome() {
+
 
   const input =
     document.getElementById(
@@ -2528,10 +4160,13 @@ function sendFromHome() {
     text
   );
 
+
 }
 
 
+
 function send() {
+
 
   const input =
     document.getElementById(
@@ -2551,29 +4186,40 @@ function send() {
     text
   );
 
+
 }
 
 
-function quickPrompt(text) {
+
+function quickPrompt(
+  text
+) {
+
 
   sendText(
     text
   );
 
+
 }
+
 
 
 /* =========================================================
    NEW CHAT
    ========================================================= */
 
+
 function newChat() {
+
 
   activeConversationId =
     null;
 
+
   tool =
     "chat";
+
 
   mode =
     "free";
@@ -2581,45 +4227,62 @@ function newChat() {
 
   syncButtons();
 
+
   showWelcome();
+
 
   renderRecent();
 
+
 }
+
 
 
 /* =========================================================
    ENTER
    ========================================================= */
 
+
 document
   .getElementById(
     "input"
   )
   .addEventListener(
+
     "keydown",
+
     event => {
 
+
       if (
-        event.key === "Enter" &&
+        event.key === "Enter"
+        &&
         !event.shiftKey
       ) {
 
+
         event.preventDefault();
+
 
         send();
 
+
       }
 
+
     }
+
   );
+
 
 
 /* =========================================================
    MOBILE
    ========================================================= */
 
+
 function toggleSidebar() {
+
 
   document
     .getElementById(
@@ -2629,17 +4292,25 @@ function toggleSidebar() {
       "open"
     );
 
+
 }
+
 
 
 /* =========================================================
    INITIALIZATION
    ========================================================= */
 
+
 renderRecent();
+
+
 showWelcome();
+
 
 </script>
 
+
 </body>
+
 </html>
