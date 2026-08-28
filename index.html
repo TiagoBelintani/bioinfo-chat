@@ -8,6 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
@@ -91,14 +92,29 @@
       display: flex;
       flex-direction: column;
 
-      padding: 25px 22px 20px;
+      padding: 22px 20px;
 
       background: var(--sidebar);
       border-right: 1px solid var(--border);
+
+      overflow-y: auto;
     }
 
+    .sidebar::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.07);
+      border-radius: 10px;
+    }
+
+    /* ======================================================
+       BRAND
+       ====================================================== */
+
     .brand {
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
     .brand-title {
@@ -106,23 +122,22 @@
       font-size: 1.75rem;
       font-weight: 400;
       line-height: 1;
-      color: var(--text);
     }
 
     .brand-subtitle {
       margin-top: 7px;
-      font-size: .76rem;
       color: var(--muted);
+      font-size: .73rem;
     }
+
+    /* ======================================================
+       NAVIGATION
+       ====================================================== */
 
     .nav-group {
-      margin-top: 5px;
-    }
-
-    .nav-separator {
-      height: 1px;
-      background: var(--border);
-      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .nav-item {
@@ -132,7 +147,7 @@
       align-items: center;
       gap: 12px;
 
-      padding: 12px 14px;
+      padding: 11px 13px;
 
       border: 0;
       border-radius: 9px;
@@ -154,22 +169,33 @@
 
     .nav-item.active {
       background: var(--accent-soft);
-      color: #f0c1b0;
+      color: #efb8a4;
     }
 
     .nav-icon {
       width: 20px;
       text-align: center;
-      font-size: .95rem;
     }
+
+    .nav-separator {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* ======================================================
+       LANGUAGE
+       ====================================================== */
 
     .language-label,
     .section-label {
       display: block;
-      margin-bottom: 9px;
+
+      margin-bottom: 8px;
 
       color: var(--muted-2);
-      font-size: .7rem;
+
+      font-size: .67rem;
       font-weight: 600;
 
       letter-spacing: .08em;
@@ -179,7 +205,7 @@
     .language-select {
       width: 100%;
 
-      padding: 11px 12px;
+      padding: 10px 12px;
 
       border: 1px solid var(--border);
       border-radius: 9px;
@@ -191,14 +217,18 @@
     }
 
     .language-select option {
-      background: #232321;
+      background: var(--surface);
       color: var(--text);
     }
+
+    /* ======================================================
+       NEW CHAT
+       ====================================================== */
 
     .new-chat {
       width: 100%;
 
-      margin-top: 18px;
+      margin-top: 17px;
       padding: 12px 14px;
 
       border: 0;
@@ -219,62 +249,197 @@
       transform: translateY(-1px);
     }
 
+    /* ======================================================
+       RECENT CONVERSATIONS
+       ====================================================== */
+
     .recent {
-      margin-top: 28px;
+      margin-top: 25px;
+    }
+
+    .recent-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 8px;
     }
 
     .recent-title {
       color: var(--muted);
-      font-size: .72rem;
-      margin-bottom: 11px;
+      font-size: .7rem;
+    }
+
+    .clear-history {
+      border: 0;
+      background: transparent;
+
+      color: var(--muted-2);
+      font-size: .64rem;
+    }
+
+    .clear-history:hover {
+      color: var(--accent);
+    }
+
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .recent-empty {
+      padding: 7px 2px;
+
+      color: var(--muted-2);
+
+      font-size: .68rem;
+      line-height: 1.5;
+    }
+
+    .recent-row {
+      display: flex;
+      align-items: center;
+
+      min-width: 0;
     }
 
     .recent-item {
-      display: block;
+      flex: 1;
+      min-width: 0;
 
-      width: 100%;
+      border: 0;
+      border-radius: 7px;
 
-      padding: 8px 3px;
+      padding: 8px 7px;
 
+      background: transparent;
       color: var(--muted);
 
-      font-size: .74rem;
+      font-size: .69rem;
+      text-align: left;
 
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
+    .recent-item:hover,
+    .recent-item.active {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+
+    .delete-chat {
+      width: 25px;
+      height: 25px;
+
+      flex: 0 0 auto;
+
+      border: 0;
+      border-radius: 6px;
+
+      background: transparent;
+      color: var(--muted-2);
+
+      opacity: 0;
+
+      transition:
+        opacity .15s ease,
+        background .15s ease;
+    }
+
+    .recent-row:hover .delete-chat {
+      opacity: 1;
+    }
+
+    .delete-chat:hover {
+      background: rgba(255,255,255,.05);
+      color: var(--accent);
+    }
+
     /* ======================================================
-       CREATOR
+       SIDEBAR BOTTOM
        ====================================================== */
 
     .sidebar-bottom {
       margin-top: auto;
+      padding-top: 24px;
     }
+
+    /* ======================================================
+       ABOUT - NOW INSIDE SIDEBAR
+       ====================================================== */
+
+    .about-sidebar {
+      margin-bottom: 12px;
+
+      padding: 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      background: rgba(255,255,255,.02);
+    }
+
+    .about-sidebar h3 {
+      margin-bottom: 7px;
+
+      color: var(--text);
+
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+    }
+
+    .about-sidebar p {
+      color: var(--muted);
+
+      font-size: .67rem;
+      line-height: 1.55;
+    }
+
+    .about-sidebar a {
+      display: inline-block;
+
+      margin-top: 9px;
+
+      color: var(--accent);
+
+      font-size: .67rem;
+
+      text-decoration: none;
+    }
+
+    /* ======================================================
+       CREATOR
+       ====================================================== */
 
     .creator-card {
       border: 1px solid var(--border);
-      border-radius: 12px;
-
-      background: rgba(255,255,255,.025);
+      border-radius: 11px;
 
       overflow: hidden;
+
+      background: rgba(255,255,255,.02);
     }
 
     .creator-main {
-      padding: 15px;
+      padding: 13px;
     }
 
     .creator-label {
+      margin-bottom: 4px;
+
       color: var(--muted-2);
-      font-size: .66rem;
-      margin-bottom: 5px;
+
+      font-size: .62rem;
     }
 
     .creator-name {
       color: var(--text);
-      font-size: .84rem;
+
+      font-size: .78rem;
       font-weight: 600;
     }
 
@@ -287,14 +452,14 @@
     .creator-links a {
       flex: 1;
 
-      padding: 11px;
+      padding: 10px;
 
       color: var(--muted);
 
       text-align: center;
       text-decoration: none;
 
-      font-size: .7rem;
+      font-size: .66rem;
     }
 
     .creator-links a:hover {
@@ -327,7 +492,7 @@
     }
 
     /* ======================================================
-       CONVERSATION
+       CHAT AREA
        ====================================================== */
 
     .chat-area {
@@ -336,9 +501,9 @@
       overflow-y: auto;
 
       padding:
-        40px
-        max(35px, calc((100% - 830px) / 2))
-        190px;
+        38px
+        max(35px, calc((100% - 820px) / 2))
+        180px;
     }
 
     .chat-area::-webkit-scrollbar {
@@ -351,7 +516,7 @@
     }
 
     /* ======================================================
-       EMPTY / HOME
+       WELCOME
        ====================================================== */
 
     .welcome {
@@ -368,11 +533,10 @@
 
     .welcome h1 {
       font-family: "Instrument Serif", Georgia, serif;
+
       font-size: clamp(3rem, 6vw, 4.5rem);
       font-weight: 400;
       line-height: .98;
-
-      color: var(--text);
 
       letter-spacing: -.025em;
     }
@@ -386,20 +550,20 @@
     }
 
     .accent-line {
-      width: 54px;
+      width: 52px;
       height: 2px;
 
-      margin: 24px auto 22px;
+      margin: 23px auto 21px;
 
       background: var(--accent);
     }
 
     .welcome-description {
-      max-width: 580px;
+      max-width: 575px;
 
       color: var(--muted);
 
-      font-size: .9rem;
+      font-size: .88rem;
       line-height: 1.65;
     }
 
@@ -408,7 +572,7 @@
        ====================================================== */
 
     .mode-buttons {
-      margin-top: 30px;
+      margin-top: 29px;
 
       display: flex;
       gap: 10px;
@@ -427,11 +591,6 @@
 
       background: transparent;
       color: var(--muted);
-
-      transition:
-        background .15s ease,
-        border-color .15s ease,
-        color .15s ease;
     }
 
     .mode-pill:hover {
@@ -440,14 +599,14 @@
     }
 
     .mode-pill.active {
-      border-color: rgba(217,119,87,.40);
+      border-color: rgba(217,119,87,.4);
 
       background: var(--accent-soft);
       color: #efb8a4;
     }
 
     /* ======================================================
-       HOME COMPOSER
+       WELCOME COMPOSER
        ====================================================== */
 
     .welcome-composer {
@@ -455,21 +614,17 @@
 
       margin-top: 22px;
 
+      padding: 15px;
+
       border: 1px solid var(--border-strong);
       border-radius: 16px;
 
-      padding: 15px;
-
       background: var(--surface);
-
-      box-shadow: 0 14px 38px rgba(0,0,0,.12);
     }
 
-    .welcome-composer textarea {
+    .welcome-composer textarea,
+    .floating-box textarea {
       width: 100%;
-
-      min-height: 70px;
-      max-height: 180px;
 
       resize: none;
 
@@ -479,16 +634,22 @@
       background: transparent;
       color: var(--text);
 
-      font-size: .92rem;
+      font-size: .9rem;
       line-height: 1.55;
     }
 
+    .welcome-composer textarea {
+      min-height: 70px;
+      max-height: 180px;
+    }
+
     textarea::placeholder {
-      color: #77736d;
+      color: var(--muted-2);
     }
 
     .composer-bottom {
       display: flex;
+
       align-items: center;
       justify-content: flex-end;
 
@@ -509,21 +670,15 @@
       background: var(--accent);
       color: white;
 
-      font-size: 1.05rem;
-
-      transition:
-        background .15s ease,
-        transform .15s ease;
+      font-size: 1rem;
     }
 
     .send-button:hover {
       background: var(--accent-hover);
-      transform: translateY(-1px);
     }
 
     .send-button:disabled {
       opacity: .45;
-      transform: none;
       cursor: default;
     }
 
@@ -534,21 +689,24 @@
     .suggestion-heading {
       width: min(690px, 100%);
 
-      margin-top: 28px;
+      margin-top: 27px;
 
       color: var(--muted-2);
-      font-size: .72rem;
 
+      font-size: .71rem;
       text-align: left;
     }
 
     .suggestions {
       width: min(690px, 100%);
 
-      margin-top: 10px;
+      margin-top: 9px;
 
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
       gap: 9px;
     }
 
@@ -563,7 +721,7 @@
 
       text-align: left;
 
-      font-size: .75rem;
+      font-size: .73rem;
     }
 
     .suggestion:hover {
@@ -571,65 +729,16 @@
       color: var(--text);
     }
 
-    /* ======================================================
-       ABOUT
-       ====================================================== */
-
-    .about-card {
-      position: absolute;
-
-      right: 26px;
-      bottom: 28px;
-
-      width: 255px;
-
-      padding: 18px;
-
-      border: 1px solid var(--border);
-      border-radius: 13px;
-
-      background: var(--surface);
-    }
-
-    .about-card h3 {
-      font-size: .82rem;
-      font-weight: 500;
-      margin-bottom: 9px;
-    }
-
-    .about-card p {
-      color: var(--muted);
-
-      font-size: .7rem;
-      line-height: 1.6;
-    }
-
-    .about-card a {
-      display: inline-block;
-
-      margin-top: 11px;
-
-      color: var(--accent);
-
-      font-size: .7rem;
-
-      text-decoration: none;
-    }
-
-    /* ======================================================
-       DISCLAIMER
-       ====================================================== */
-
     .disclaimer {
-      margin-top: 32px;
+      margin-top: 30px;
 
       color: var(--muted-2);
 
-      font-size: .66rem;
+      font-size: .64rem;
     }
 
     /* ======================================================
-       CHAT MESSAGES
+       MESSAGES
        ====================================================== */
 
     .message {
@@ -637,13 +746,13 @@
 
       margin-bottom: 28px;
 
-      animation: fadeIn .2s ease;
+      animation: fadeIn .18s ease;
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(4px);
+        transform: translateY(3px);
       }
 
       to {
@@ -666,7 +775,7 @@
 
       line-height: 1.72;
 
-      font-size: .94rem;
+      font-size: .91rem;
     }
 
     .user .bubble {
@@ -687,7 +796,8 @@
       margin-bottom: 7px;
 
       font-family: "Instrument Serif", Georgia, serif;
-      font-size: 1.05rem;
+
+      font-size: 1.03rem;
 
       color: var(--accent);
     }
@@ -703,7 +813,7 @@
 
       color: var(--muted);
 
-      font-size: .75rem;
+      font-size: .74rem;
     }
 
     .dots {
@@ -741,7 +851,7 @@
     }
 
     /* ======================================================
-       CHAT MODE COMPOSER
+       FLOATING COMPOSER
        ====================================================== */
 
     .floating-composer {
@@ -754,9 +864,9 @@
       bottom: 0;
 
       padding:
-        25px
-        max(35px, calc((100% - 830px) / 2))
-        22px;
+        24px
+        max(35px, calc((100% - 820px) / 2))
+        21px;
 
       background:
         linear-gradient(
@@ -777,36 +887,19 @@
       border-radius: 15px;
 
       background: var(--surface);
-
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
     }
 
     .floating-box textarea {
-      width: 100%;
-
-      min-height: 52px;
+      min-height: 50px;
       max-height: 150px;
-
-      resize: none;
-
-      border: 0;
-      outline: none;
-
-      background: transparent;
-      color: var(--text);
     }
 
     /* ======================================================
        MOBILE
        ====================================================== */
 
-    @media (max-width: 1000px) {
-      .about-card {
-        display: none;
-      }
-    }
-
     @media (max-width: 760px) {
+
       .sidebar {
         position: fixed;
 
@@ -827,8 +920,8 @@
 
         position: fixed;
 
-        left: 15px;
-        top: 15px;
+        left: 14px;
+        top: 14px;
 
         z-index: 90;
 
@@ -844,7 +937,7 @@
 
       .chat-area {
         padding:
-          90px 18px
+          85px 18px
           180px;
       }
 
@@ -852,13 +945,10 @@
         grid-template-columns: 1fr;
       }
 
-      .welcome h1 {
-        font-size: 3rem;
-      }
-
       .floating-composer {
         padding: 20px 14px 14px;
       }
+
     }
   </style>
 </head>
@@ -867,14 +957,26 @@
 
 <div class="app">
 
-  <aside class="sidebar" id="sidebar">
+  <!-- =====================================================
+       SIDEBAR
+       ===================================================== -->
+
+  <aside
+    class="sidebar"
+    id="sidebar">
 
     <div class="brand">
-      <div class="brand-title">BioInfo Chat</div>
+
+      <div class="brand-title">
+        BioInfo Chat
+      </div>
+
       <div class="brand-subtitle">
         Bioinformatics, Omics & Evolution
       </div>
+
     </div>
+
 
     <div class="nav-group">
 
@@ -882,41 +984,55 @@
         id="chatBtn"
         class="nav-item active"
         onclick="setTool('chat')">
+
         <span class="nav-icon">◯</span>
         Chat
+
       </button>
+
 
       <button
         id="journalBtn"
         class="nav-item"
         onclick="setTool('journals')">
+
         <span class="nav-icon">▤</span>
         Periódicos
+
       </button>
+
 
       <button
         id="freeBtn"
         class="nav-item active"
         onclick="setMode('free')">
+
         <span class="nav-icon">✦</span>
         Livre
+
       </button>
+
 
       <button
         id="discBtn"
         class="nav-item"
         onclick="setMode('discipline')">
+
         <span class="nav-icon">◇</span>
         Disciplina
+
       </button>
 
     </div>
 
+
     <div class="nav-separator"></div>
+
 
     <label class="language-label">
       Idioma
     </label>
+
 
     <select
       id="language"
@@ -932,37 +1048,81 @@
 
     </select>
 
+
     <button
       class="new-chat"
       onclick="newChat()">
+
       ＋ Nova conversa
+
     </button>
+
+
+    <!-- REAL HISTORY -->
 
     <div class="recent">
 
-      <div class="recent-title">
-        Conversas recentes
+      <div class="recent-header">
+
+        <div class="recent-title">
+          Conversas recentes
+        </div>
+
+        <button
+          class="clear-history"
+          onclick="clearHistory()">
+
+          Limpar
+
+        </button>
+
       </div>
 
-      <div class="recent-item">
-        Como interpretar árvores filogenéticas?
-      </div>
-
-      <div class="recent-item">
-        Ferramentas para análise de RNA-seq
-      </div>
-
-      <div class="recent-item">
-        Melhores bases de dados genômicos
-      </div>
-
-      <div class="recent-item">
-        Pipeline de anotação funcional
+      <div
+        class="recent-list"
+        id="recentList">
       </div>
 
     </div>
 
+
+    <!-- ===================================================
+         BOTTOM
+         =================================================== -->
+
     <div class="sidebar-bottom">
+
+
+      <!-- ABOUT -->
+
+      <div class="about-sidebar">
+
+        <h3>
+          Sobre o BioInfo Chat
+        </h3>
+
+        <p>
+          Ferramenta acadêmica experimental
+          para apoio ao ensino e estudo em
+          Bioinformática, Ômicas e Evolução.
+          As respostas devem ser avaliadas
+          criticamente e confrontadas com
+          a literatura científica.
+        </p>
+
+        <a
+          href="https://tiagobelintani.github.io/"
+          target="_blank"
+          rel="noopener">
+
+          Saiba mais →
+
+        </a>
+
+      </div>
+
+
+      <!-- CREATOR -->
 
       <div class="creator-card">
 
@@ -984,14 +1144,18 @@
             href="https://tiagobelintani.github.io/"
             target="_blank"
             rel="noopener">
+
             Website
+
           </a>
 
           <a
             href="https://github.com/TiagoBelintani"
             target="_blank"
             rel="noopener">
+
             GitHub
+
           </a>
 
         </div>
@@ -1003,12 +1167,19 @@
   </aside>
 
 
+  <!-- =====================================================
+       MAIN
+       ===================================================== -->
+
   <main class="main">
+
 
     <button
       class="mobile-menu"
       onclick="toggleSidebar()">
+
       ☰
+
     </button>
 
 
@@ -1016,141 +1187,7 @@
       class="chat-area"
       id="chat">
 
-      <div
-        class="welcome"
-        id="welcome">
-
-        <h1>
-          BioInfo Chat
-        </h1>
-
-        <div class="welcome-subtitle">
-          Bioinformatics, Omics & Evolution
-        </div>
-
-        <div class="accent-line"></div>
-
-        <div class="welcome-description">
-          Faça perguntas, explore conceitos, métodos e análises
-          em bioinformática, ômicas e evolução.
-        </div>
-
-
-        <div class="mode-buttons">
-
-          <button
-            id="homeChatBtn"
-            class="mode-pill active"
-            onclick="setTool('chat')">
-            Chat
-          </button>
-
-          <button
-            id="homeJournalBtn"
-            class="mode-pill"
-            onclick="setTool('journals')">
-            Periódicos
-          </button>
-
-          <button
-            id="homeFreeBtn"
-            class="mode-pill active"
-            onclick="setMode('free')">
-            Livre
-          </button>
-
-          <button
-            id="homeDiscBtn"
-            class="mode-pill"
-            onclick="setMode('discipline')">
-            Disciplina
-          </button>
-
-        </div>
-
-
-        <div class="welcome-composer">
-
-          <textarea
-            id="homeInput"
-            placeholder="Digite sua pergunta..."
-            rows="2"></textarea>
-
-          <div class="composer-bottom">
-
-            <button
-              id="homeSend"
-              class="send-button"
-              onclick="sendFromHome()">
-              ↑
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <div class="suggestion-heading">
-          Sugestões para começar
-        </div>
-
-        <div class="suggestions">
-
-          <button
-            class="suggestion"
-            onclick="quickPrompt('Explique alinhamento de sequências.')">
-            Explicar alinhamento de sequências
-          </button>
-
-          <button
-            class="suggestion"
-            onclick="quickPrompt('Quais são as melhores ferramentas para filogenômica?')">
-            Melhores ferramentas para filogenômica
-          </button>
-
-          <button
-            class="suggestion"
-            onclick="quickPrompt('Explique um pipeline de RNA-Seq passo a passo.')">
-            Pipeline de RNA-Seq passo a passo
-          </button>
-
-          <button
-            class="suggestion"
-            onclick="quickPrompt('Sugira periódicos para um estudo genômico.')">
-            Periódicos para estudos genômicos
-          </button>
-
-        </div>
-
-
-        <div class="disclaimer">
-          Uso acadêmico. As respostas não substituem
-          leitura crítica da literatura científica.
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="about-card">
-
-      <h3>
-        Sobre o BioInfo Chat
-      </h3>
-
-      <p>
-        Ferramenta acadêmica experimental desenvolvida
-        para apoiar estudantes, pesquisadores e docentes
-        em Bioinformática, Ômicas e Evolução.
-      </p>
-
-      <a
-        href="https://tiagobelintani.github.io/"
-        target="_blank"
-        rel="noopener">
-        Saiba mais →
-      </a>
+      <!-- filled by JS -->
 
     </div>
 
@@ -1164,7 +1201,8 @@
         <textarea
           id="input"
           placeholder="Digite sua pergunta..."
-          rows="2"></textarea>
+          rows="2">
+        </textarea>
 
         <div class="composer-bottom">
 
@@ -1172,7 +1210,9 @@
             id="sendButton"
             class="send-button"
             onclick="send()">
+
             ↑
+
           </button>
 
         </div>
@@ -1188,11 +1228,24 @@
 
 <script>
 
+/* =========================================================
+   STATE
+   ========================================================= */
+
 let mode = "free";
 let tool = "chat";
 let language = "pt";
-let isSending = false;
 
+let isSending = false;
+let activeConversationId = null;
+
+const STORAGE_KEY =
+  "bioinfo_chat_conversations_v1";
+
+
+/* =========================================================
+   PROMPTS
+   ========================================================= */
 
 const PROMPTS = {
 
@@ -1233,13 +1286,746 @@ const PROMPTS = {
 };
 
 
+/* =========================================================
+   STORAGE
+   ========================================================= */
+
+function getConversations() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
+    ) || [];
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+function saveConversations(conversations) {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(conversations)
+  );
+
+}
+
+
+function createConversation(firstMessage) {
+
+  const conversations =
+    getConversations();
+
+  const conversation = {
+
+    id:
+      Date.now().toString(),
+
+    title:
+      makeTitle(firstMessage),
+
+    createdAt:
+      Date.now(),
+
+    updatedAt:
+      Date.now(),
+
+    tool,
+    mode,
+    language,
+
+    messages: []
+
+  };
+
+  conversations.unshift(
+    conversation
+  );
+
+  saveConversations(
+    conversations
+  );
+
+  activeConversationId =
+    conversation.id;
+
+  renderRecent();
+
+  return conversation;
+
+}
+
+
+function makeTitle(text) {
+
+  const clean =
+    text
+      .replace(/\s+/g, " ")
+      .trim();
+
+  if (clean.length <= 40) {
+    return clean;
+  }
+
+  return clean.slice(0, 40) + "…";
+
+}
+
+
+function getActiveConversation() {
+
+  if (!activeConversationId) {
+    return null;
+  }
+
+  return getConversations()
+    .find(
+      item =>
+        item.id ===
+        activeConversationId
+    ) || null;
+
+}
+
+
+function updateConversation(
+  conversation
+) {
+
+  const conversations =
+    getConversations();
+
+  const index =
+    conversations.findIndex(
+      item =>
+        item.id === conversation.id
+    );
+
+  if (index === -1) {
+    return;
+  }
+
+  conversation.updatedAt =
+    Date.now();
+
+  conversations[index] =
+    conversation;
+
+  conversations.sort(
+    (a, b) =>
+      b.updatedAt -
+      a.updatedAt
+  );
+
+  saveConversations(
+    conversations
+  );
+
+  renderRecent();
+
+}
+
+
+/* =========================================================
+   HISTORY SIDEBAR
+   ========================================================= */
+
+function renderRecent() {
+
+  const container =
+    document.getElementById(
+      "recentList"
+    );
+
+  const conversations =
+    getConversations();
+
+  container.innerHTML = "";
+
+
+  if (!conversations.length) {
+
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+    empty.className =
+      "recent-empty";
+
+    empty.textContent =
+      "Nenhuma conversa salva ainda.";
+
+    container.appendChild(
+      empty
+    );
+
+    return;
+
+  }
+
+
+  conversations
+    .slice(0, 8)
+    .forEach(
+      conversation => {
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+        row.className =
+          "recent-row";
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.className =
+          "recent-item";
+
+        if (
+          conversation.id ===
+          activeConversationId
+        ) {
+
+          button.classList.add(
+            "active"
+          );
+
+        }
+
+        button.textContent =
+          conversation.title;
+
+        button.onclick =
+          () =>
+            loadConversation(
+              conversation.id
+            );
+
+
+        const remove =
+          document.createElement(
+            "button"
+          );
+
+        remove.className =
+          "delete-chat";
+
+        remove.title =
+          "Excluir conversa";
+
+        remove.textContent =
+          "×";
+
+        remove.onclick =
+          event => {
+
+            event.stopPropagation();
+
+            deleteConversation(
+              conversation.id
+            );
+
+          };
+
+
+        row.appendChild(button);
+        row.appendChild(remove);
+
+        container.appendChild(row);
+
+      }
+    );
+
+}
+
+
+function deleteConversation(id) {
+
+  let conversations =
+    getConversations();
+
+  conversations =
+    conversations.filter(
+      item =>
+        item.id !== id
+    );
+
+  saveConversations(
+    conversations
+  );
+
+
+  if (
+    activeConversationId === id
+  ) {
+
+    activeConversationId =
+      null;
+
+    showWelcome();
+
+  }
+
+
+  renderRecent();
+
+}
+
+
+function clearHistory() {
+
+  const conversations =
+    getConversations();
+
+  if (!conversations.length) {
+    return;
+  }
+
+  const confirmed =
+    confirm(
+      "Excluir todas as conversas salvas?"
+    );
+
+  if (!confirmed) {
+    return;
+  }
+
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
+
+  activeConversationId =
+    null;
+
+  renderRecent();
+  showWelcome();
+
+}
+
+
+/* =========================================================
+   LOAD CONVERSATION
+   ========================================================= */
+
+function loadConversation(id) {
+
+  const conversation =
+    getConversations()
+      .find(
+        item => item.id === id
+      );
+
+  if (!conversation) {
+    return;
+  }
+
+  activeConversationId =
+    conversation.id;
+
+  tool =
+    conversation.tool ||
+    "chat";
+
+  mode =
+    conversation.mode ||
+    "free";
+
+  language =
+    conversation.language ||
+    "pt";
+
+
+  document.getElementById(
+    "language"
+  ).value = language;
+
+  syncButtons();
+
+
+  const chat =
+    document.getElementById(
+      "chat"
+    );
+
+  chat.innerHTML = "";
+
+
+  conversation.messages
+    .forEach(
+      message => {
+
+        addMessage(
+          message.content,
+          message.role,
+          false
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "floatingComposer"
+    )
+    .classList.add(
+      "visible"
+    );
+
+
+  renderRecent();
+  updatePlaceholders();
+  scrollBottom();
+
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+function showWelcome() {
+
+  const chat =
+    document.getElementById(
+      "chat"
+    );
+
+  chat.innerHTML = `
+
+    <div
+      class="welcome"
+      id="welcome">
+
+      <h1>
+        BioInfo Chat
+      </h1>
+
+      <div
+        class="welcome-subtitle">
+
+        Bioinformatics, Omics & Evolution
+
+      </div>
+
+      <div
+        class="accent-line">
+      </div>
+
+      <div
+        class="welcome-description">
+
+        Faça perguntas, explore conceitos,
+        métodos e análises em bioinformática,
+        ômicas e evolução.
+
+      </div>
+
+
+      <div
+        class="mode-buttons">
+
+        <button
+          id="homeChatBtn"
+          class="mode-pill"
+          onclick="setTool('chat')">
+
+          Chat
+
+        </button>
+
+        <button
+          id="homeJournalBtn"
+          class="mode-pill"
+          onclick="setTool('journals')">
+
+          Periódicos
+
+        </button>
+
+        <button
+          id="homeFreeBtn"
+          class="mode-pill"
+          onclick="setMode('free')">
+
+          Livre
+
+        </button>
+
+        <button
+          id="homeDiscBtn"
+          class="mode-pill"
+          onclick="setMode('discipline')">
+
+          Disciplina
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="welcome-composer">
+
+        <textarea
+          id="homeInput"
+          placeholder="Digite sua pergunta..."
+          rows="2"></textarea>
+
+        <div
+          class="composer-bottom">
+
+          <button
+            id="homeSend"
+            class="send-button"
+            onclick="sendFromHome()">
+
+            ↑
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="suggestion-heading">
+
+        Sugestões para começar
+
+      </div>
+
+
+      <div
+        class="suggestions">
+
+        <button
+          class="suggestion"
+          onclick="quickPrompt(
+            'Explique alinhamento de sequências.'
+          )">
+
+          Explicar alinhamento de sequências
+
+        </button>
+
+
+        <button
+          class="suggestion"
+          onclick="quickPrompt(
+            'Quais são as melhores ferramentas para filogenômica?'
+          )">
+
+          Melhores ferramentas para filogenômica
+
+        </button>
+
+
+        <button
+          class="suggestion"
+          onclick="quickPrompt(
+            'Explique um pipeline de RNA-Seq passo a passo.'
+          )">
+
+          Pipeline de RNA-Seq passo a passo
+
+        </button>
+
+
+        <button
+          class="suggestion"
+          onclick="quickPrompt(
+            'Sugira periódicos para um estudo genômico.'
+          )">
+
+          Periódicos para estudos genômicos
+
+        </button>
+
+      </div>
+
+
+      <div
+        class="disclaimer">
+
+        Uso acadêmico.
+        As respostas não substituem
+        leitura crítica da literatura científica.
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById(
+      "floatingComposer"
+    )
+    .classList.remove(
+      "visible"
+    );
+
+
+  const homeInput =
+    document.getElementById(
+      "homeInput"
+    );
+
+  homeInput.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey
+      ) {
+
+        event.preventDefault();
+
+        sendFromHome();
+
+      }
+
+    }
+  );
+
+
+  syncButtons();
+  updatePlaceholders();
+
+}
+
+
+/* =========================================================
+   MODE / TOOL
+   ========================================================= */
+
+function setTool(
+  selectedTool
+) {
+
+  tool =
+    selectedTool;
+
+  syncButtons();
+  updatePlaceholders();
+
+}
+
+
+function setMode(
+  selectedMode
+) {
+
+  mode =
+    selectedMode;
+
+  syncButtons();
+
+}
+
+
+function syncButtons() {
+
+  const pairs = [
+
+    [
+      "chatBtn",
+      tool === "chat"
+    ],
+
+    [
+      "journalBtn",
+      tool === "journals"
+    ],
+
+    [
+      "freeBtn",
+      mode === "free"
+    ],
+
+    [
+      "discBtn",
+      mode === "discipline"
+    ],
+
+    [
+      "homeChatBtn",
+      tool === "chat"
+    ],
+
+    [
+      "homeJournalBtn",
+      tool === "journals"
+    ],
+
+    [
+      "homeFreeBtn",
+      mode === "free"
+    ],
+
+    [
+      "homeDiscBtn",
+      mode === "discipline"
+    ]
+
+  ];
+
+
+  pairs.forEach(
+    ([id, active]) => {
+
+      const element =
+        document.getElementById(
+          id
+        );
+
+      if (element) {
+
+        element
+          .classList
+          .toggle(
+            "active",
+            active
+          );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+   ========================================================= */
+
 document
-  .getElementById("language")
+  .getElementById(
+    "language"
+  )
   .addEventListener(
     "change",
-    function(event) {
+    event => {
 
-      language = event.target.value;
+      language =
+        event.target.value;
 
       updatePlaceholders();
 
@@ -1247,143 +2033,104 @@ document
   );
 
 
-function setTool(selectedTool) {
-
-  tool = selectedTool;
-
-  document
-    .getElementById("chatBtn")
-    .classList.toggle(
-      "active",
-      tool === "chat"
-    );
-
-  document
-    .getElementById("journalBtn")
-    .classList.toggle(
-      "active",
-      tool === "journals"
-    );
-
-  document
-    .getElementById("homeChatBtn")
-    ?.classList.toggle(
-      "active",
-      tool === "chat"
-    );
-
-  document
-    .getElementById("homeJournalBtn")
-    ?.classList.toggle(
-      "active",
-      tool === "journals"
-    );
-
-  updatePlaceholders();
-
-}
-
-
-function setMode(selectedMode) {
-
-  mode = selectedMode;
-
-  document
-    .getElementById("freeBtn")
-    .classList.toggle(
-      "active",
-      mode === "free"
-    );
-
-  document
-    .getElementById("discBtn")
-    .classList.toggle(
-      "active",
-      mode === "discipline"
-    );
-
-  document
-    .getElementById("homeFreeBtn")
-    ?.classList.toggle(
-      "active",
-      mode === "free"
-    );
-
-  document
-    .getElementById("homeDiscBtn")
-    ?.classList.toggle(
-      "active",
-      mode === "discipline"
-    );
-
-}
-
-
 function updatePlaceholders() {
 
-  const homeInput =
-    document.getElementById("homeInput");
+  const placeholder =
+    tool === "journals"
+      ?
+        (
+          language === "pt"
+            ?
+              "Cole aqui o resumo do artigo..."
+            :
+              "Paste your manuscript abstract here..."
+        )
+      :
+        (
+          language === "pt"
+            ?
+              "Digite sua pergunta..."
+            :
+              "Ask your question..."
+        );
+
 
   const input =
-    document.getElementById("input");
+    document.getElementById(
+      "input"
+    );
 
-  let placeholder;
-
-  if (tool === "journals") {
-
-    placeholder =
-      language === "pt"
-        ? "Cole aqui o resumo do artigo..."
-        : "Paste your manuscript abstract here...";
-
-  } else {
-
-    placeholder =
-      language === "pt"
-        ? "Digite sua pergunta..."
-        : "Ask your question...";
-
+  if (input) {
+    input.placeholder =
+      placeholder;
   }
+
+
+  const homeInput =
+    document.getElementById(
+      "homeInput"
+    );
 
   if (homeInput) {
-    homeInput.placeholder = placeholder;
+    homeInput.placeholder =
+      placeholder;
   }
-
-  input.placeholder = placeholder;
 
 }
 
 
-function removeWelcome() {
+/* =========================================================
+   CHAT RENDERING
+   ========================================================= */
+
+function prepareChat() {
 
   const welcome =
-    document.getElementById("welcome");
+    document.getElementById(
+      "welcome"
+    );
 
   if (welcome) {
     welcome.remove();
   }
 
   document
-    .getElementById("floatingComposer")
-    .classList.add("visible");
+    .getElementById(
+      "floatingComposer"
+    )
+    .classList.add(
+      "visible"
+    );
 
 }
 
 
-function addMessage(text, role) {
+function addMessage(
+  text,
+  role,
+  scroll = true
+) {
 
-  removeWelcome();
+  prepareChat();
+
 
   const message =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   message.className =
     `message ${role}`;
 
-  if (role === "assistant") {
+
+  if (
+    role === "assistant"
+  ) {
 
     const name =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
     name.className =
       "assistant-name";
@@ -1391,12 +2138,17 @@ function addMessage(text, role) {
     name.textContent =
       "BioInfo Chat";
 
-    message.appendChild(name);
+    message.appendChild(
+      name
+    );
 
   }
 
+
   const bubble =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   bubble.className =
     "bubble";
@@ -1404,21 +2156,39 @@ function addMessage(text, role) {
   bubble.textContent =
     text;
 
-  message.appendChild(bubble);
+  message.appendChild(
+    bubble
+  );
+
 
   document
-    .getElementById("chat")
-    .appendChild(message);
+    .getElementById(
+      "chat"
+    )
+    .appendChild(
+      message
+    );
 
-  scrollBottom();
+
+  if (scroll) {
+    scrollBottom();
+  }
 
 }
 
 
+/* =========================================================
+   THINKING
+   ========================================================= */
+
 function addThinking() {
 
+  prepareChat();
+
   const thinking =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   thinking.className =
     "message assistant";
@@ -1428,27 +2198,39 @@ function addThinking() {
 
   thinking.innerHTML = `
 
-    <div class="assistant-name">
+    <div
+      class="assistant-name">
+
       BioInfo Chat
+
     </div>
 
-    <div class="thinking">
+    <div
+      class="thinking">
 
       Respondendo
 
       <div class="dots">
+
         <span></span>
         <span></span>
         <span></span>
+
       </div>
 
     </div>
 
   `;
 
+
   document
-    .getElementById("chat")
-    .appendChild(thinking);
+    .getElementById(
+      "chat"
+    )
+    .appendChild(
+      thinking
+    );
+
 
   scrollBottom();
 
@@ -1458,7 +2240,9 @@ function addThinking() {
 function removeThinking() {
 
   document
-    .getElementById("thinkingMessage")
+    .getElementById(
+      "thinkingMessage"
+    )
     ?.remove();
 
 }
@@ -1467,7 +2251,9 @@ function removeThinking() {
 function scrollBottom() {
 
   const chat =
-    document.getElementById("chat");
+    document.getElementById(
+      "chat"
+    );
 
   chat.scrollTop =
     chat.scrollHeight;
@@ -1475,18 +2261,65 @@ function scrollBottom() {
 }
 
 
+/* =========================================================
+   SEND
+   ========================================================= */
+
 async function sendText(text) {
 
   if (isSending) {
     return;
   }
 
+
   text =
     text.trim();
+
 
   if (!text) {
     return;
   }
+
+
+  let conversation =
+    getActiveConversation();
+
+
+  if (!conversation) {
+
+    conversation =
+      createConversation(
+        text
+      );
+
+  }
+
+
+  conversation.tool =
+    tool;
+
+  conversation.mode =
+    mode;
+
+  conversation.language =
+    language;
+
+
+  conversation.messages.push({
+
+    role:
+      "user",
+
+    content:
+      text
+
+  });
+
+
+  updateConversation(
+    conversation
+  );
+
 
   addMessage(
     text,
@@ -1496,31 +2329,57 @@ async function sendText(text) {
 
   const systemPrompt =
     tool === "chat"
-      ? PROMPTS[language].chat[mode]
-      : PROMPTS[language].journals;
+      ?
+        PROMPTS[
+          language
+        ].chat[
+          mode
+        ]
+      :
+        PROMPTS[
+          language
+        ].journals;
 
 
   isSending = true;
 
+
   document
-    .getElementById("sendButton")
+    .getElementById(
+      "sendButton"
+    )
     .disabled = true;
+
 
   addThinking();
 
 
   try {
 
+    /*
+      The complete conversation is sent
+      so the assistant retains context.
+    */
+
+    const recentMessages =
+      conversation
+        .messages
+        .slice(-12);
+
+
     const response =
       await fetch(
         "/api/chat",
         {
 
-          method: "POST",
+          method:
+            "POST",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
           body:
@@ -1529,14 +2388,16 @@ async function sendText(text) {
               messages: [
 
                 {
-                  role: "system",
-                  content: systemPrompt
+
+                  role:
+                    "system",
+
+                  content:
+                    systemPrompt
+
                 },
 
-                {
-                  role: "user",
-                  content: text
-                }
+                ...recentMessages
 
               ]
 
@@ -1555,14 +2416,16 @@ async function sendText(text) {
 
     if (!response.ok) {
 
-      const message =
+      const errorMessage =
         data?.error?.message ||
         "Não foi possível gerar a resposta.";
 
+
       addMessage(
-        `Erro: ${message}`,
+        `Erro: ${errorMessage}`,
         "assistant"
       );
+
 
       return;
 
@@ -1574,10 +2437,34 @@ async function sendText(text) {
         ?.message?.content;
 
 
-    addMessage(
+    const answer =
       reply ||
-      "Não foi possível gerar uma resposta.",
+      "Não foi possível gerar uma resposta.";
+
+
+    addMessage(
+      answer,
       "assistant"
+    );
+
+
+    conversation =
+      getActiveConversation();
+
+
+    conversation.messages.push({
+
+      role:
+        "assistant",
+
+      content:
+        answer
+
+    });
+
+
+    updateConversation(
+      conversation
     );
 
 
@@ -1585,21 +2472,31 @@ async function sendText(text) {
 
     removeThinking();
 
+
     addMessage(
       "Não foi possível conectar ao serviço. Tente novamente.",
       "assistant"
     );
 
+
   } finally {
 
-    isSending = false;
+    isSending =
+      false;
+
 
     document
-      .getElementById("sendButton")
-      .disabled = false;
+      .getElementById(
+        "sendButton"
+      )
+      .disabled =
+        false;
+
 
     document
-      .getElementById("input")
+      .getElementById(
+        "input"
+      )
       .focus();
 
   }
@@ -1607,17 +2504,29 @@ async function sendText(text) {
 }
 
 
+/* =========================================================
+   INPUT ACTIONS
+   ========================================================= */
+
 function sendFromHome() {
 
   const input =
-    document.getElementById("homeInput");
+    document.getElementById(
+      "homeInput"
+    );
+
 
   const text =
     input.value;
 
-  input.value = "";
 
-  sendText(text);
+  input.value =
+    "";
+
+
+  sendText(
+    text
+  );
 
 }
 
@@ -1625,58 +2534,71 @@ function sendFromHome() {
 function send() {
 
   const input =
-    document.getElementById("input");
+    document.getElementById(
+      "input"
+    );
+
 
   const text =
     input.value;
 
-  input.value = "";
 
-  sendText(text);
+  input.value =
+    "";
+
+
+  sendText(
+    text
+  );
 
 }
 
 
 function quickPrompt(text) {
 
-  sendText(text);
+  sendText(
+    text
+  );
 
 }
 
+
+/* =========================================================
+   NEW CHAT
+   ========================================================= */
 
 function newChat() {
 
-  window.location.reload();
+  activeConversationId =
+    null;
+
+  tool =
+    "chat";
+
+  mode =
+    "free";
+
+
+  syncButtons();
+
+  showWelcome();
+
+  renderRecent();
 
 }
 
 
-document
-  .getElementById("homeInput")
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key === "Enter" &&
-        !event.shiftKey
-      ) {
-
-        event.preventDefault();
-
-        sendFromHome();
-
-      }
-
-    }
-  );
-
+/* =========================================================
+   ENTER
+   ========================================================= */
 
 document
-  .getElementById("input")
+  .getElementById(
+    "input"
+  )
   .addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
       if (
         event.key === "Enter" &&
@@ -1693,13 +2615,29 @@ document
   );
 
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 function toggleSidebar() {
 
   document
-    .getElementById("sidebar")
-    .classList.toggle("open");
+    .getElementById(
+      "sidebar"
+    )
+    .classList.toggle(
+      "open"
+    );
 
 }
+
+
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+renderRecent();
+showWelcome();
 
 </script>
 
